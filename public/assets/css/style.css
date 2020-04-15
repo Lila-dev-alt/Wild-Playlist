@@ -1,3 +1,20 @@
+.navbar-brand img {
+    height: 70px;
+}
+
+ .pink-hover:hover {
+    color: #F26DC4 !important;
+}
+.blue-hover:hover {
+    color: #1B78F2 !important;
+}
+.green-hover:hover {
+    color: #038C5A !important;
+}
+.purple-hover:hover {
+    color: #7E338F !important;
+}
+
 .footer{
     background-color: #730202;
     color: white;
