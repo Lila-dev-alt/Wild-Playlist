@@ -4,29 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Wild Playlist{% endblock %}</title>
+    <link rel="icon" href="/assets/images/favicon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
-
     {% block stylesheet %}{% endblock %}
-    <link rel="icon" href="/assets/images/favicon.png">
 </head>
-
 <body>
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
-        <a class="navbar-brand" href="#"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
+   <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
+        <a class="navbar-brand" href="/home/index"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link pink-hover" href="#">Home </a>
+                    <a class="nav-link pink-hover" href="/home/index">Home </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link blue-hover"  href="#">Trouver une playlist</a>
@@ -71,14 +67,14 @@
                 </a>
             </div>
         </div>
-        <p class="mt-2 text-center font-weight-lighter">© 2020 Tous droits réservés <img src="https://avatars3.githubusercontent.com/u/8874047?s=200&v=4" width="20px" alt=""></p>
+        <p class="mt-2 text-center font-weight-lighter">© 2020 Tous droits réservés <img src="https://avatars3.githubusercontent.com/u/8874047?s=200&v=4" alt="logo Wild Code School"></p>
     </footer>
 {% endblock %}
-{% block js %}
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% block javascript %}{% endblock %}
 </body>
 </html>
 
