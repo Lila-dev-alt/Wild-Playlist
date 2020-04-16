@@ -1,11 +1,14 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+a{
+     text-decoration: none;
+     list-style: none;
+ }
 
 .navbar-brand img {
     height: 70px;
 }
-
  .pink-hover:hover {
     color: #F26DC4 !important;
 }
@@ -19,11 +22,12 @@ body {
     color: #7E338F !important;
 }
 
+.media:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2) !important;
+}
 .footer{
     height: 20vh;
 }
-a{
-    text-decoration: none;
-    list-style: none;
-}
+
+
 
