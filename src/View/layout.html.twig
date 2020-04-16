@@ -8,14 +8,16 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
+
     {% block stylesheet %}{% endblock %}
     <link rel="icon" href="/assets/images/favicon.png">
 </head>
 
 <body>
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
         <a class="navbar-brand" href="#"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,33 +41,33 @@
 {% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}
-    <footer class="footer fixed-bottom">
+    <footer class="footer border-top border-success">
         <div class="container-fluid d-flex justify-content-between">
             <div class="mt-4">
                 <p>Made Wildly with Love by :</p>
                 <div class=" ">
                     <div class="d-flex justify-content-around ">
-                        <a class="text-white" href="" target="_blank">Amélie</a>
-                        <a class="text-white" href="" target="_blank">Elisa</a>
+                        <a class="text-dark" href="" target="_blank">Amélie</a>
+                        <a class="text-dark" href="" target="_blank">Elisa</a>
                     </div>
                     <div class="d-flex justify-content-around mt-3">
-                        <a class="text-white" href="" target="_blank">Fred</a>
-                        <a class="text-white" href="" target="_blank">Ludovic</a>
+                        <a class="text-dark" href="" target="_blank">Fred</a>
+                        <a class="text-dark" href="" target="_blank">Ludovic</a>
                     </div>
                 </div>
             </div>
             <div class=" mt-5">
                 <a href="https://www.facebook.com/WildCodeSchool/" class="fb-ic">
-                    <i class="fab fa-facebook-f fa-lg text-white mr-md-5 mr-3 fa-2x"> </i>
+                    <i class="fab fa-facebook-f fa-lg text-blue mr-md-5 mr-3 fa-2x"> </i>
                 </a>
                 <a href="https://twitter.com/WildSchool_Bdx" class="fb-ic">
-                    <i class="fab fa-twitter fa-lg text-white mr-md-5 mr-3 fa-2x"></i>
+                    <i class="fab fa-twitter fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
                 </a>
                 <a href="https://www.linkedin.com/school/wild-codes-chool/">
-                    <i class="fab fa-linkedin-in fa-lg text-white mr-md-5 mr-3 fa-2x"></i>
+                    <i class="fab fa-linkedin-in fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
                 </a>
                 <a href="https://www.instagram.com/wildcodeschoolofficial/?hl=fr">
-                    <i class="fab fa-instagram fa-lg text-white mr-md-5 mr-3 fa-2x"></i>
+                    <i class="fab fa-instagram fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
                 </a>
             </div>
         </div>
