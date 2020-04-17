@@ -32,9 +32,14 @@ a{
     width:25px;
 }
 
+.media iframe {
+    border:none;
+}
+
 @media screen and (max-width: 1000px) {
-    iframe {
+    .media iframe {
         width: 250px;
         height: 150px;
+        border-top-color: white;
     }
 }
