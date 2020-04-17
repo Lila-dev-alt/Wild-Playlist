@@ -1,0 +1,40 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+a{
+     text-decoration: none;
+     list-style: none;
+ }
+
+.navbar-brand img {
+    height: 70px;
+}
+
+.navbar .navbar-nav > .active > .pink-hover:hover{
+    color: #F26DC4 ;
+}
+.navbar .navbar-nav > .nav-item > .blue-hover:hover {
+    color: #1B78F2;
+}
+.navbar .collapse > .nav-item > .green-hover:hover {
+    color: #038C5A;
+}
+.navbar .collapse > .nav-item > .purple-hover:hover {
+    color: #7E338F;
+}
+.media:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2) !important;
+}
+.footer{
+    height: 20vh;
+}
+.footer >p >img{
+    width:25px;
+}
+
+@media screen and (max-width: 1000px) {
+    iframe {
+        width: 250px;
+        height: 150px;
+    }
+}
