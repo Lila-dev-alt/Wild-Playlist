@@ -8,9 +8,10 @@
 
 namespace App\Controller;
 
+use App\Model\HomeManager;
+
 class HomeController extends AbstractController
 {
-
     /**
      * Display home page
      *
@@ -19,8 +20,12 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function index() : string
     {
-        return $this->twig->render('Home/index.html.twig');
+        $homeManager = new HomeManager();
+        $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(1, 3);
+        return $this->twig->render('Home/index.html.twig', [
+            'playlists'=>$playlists,
+        ]);
     }
 }
