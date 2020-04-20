@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
-a{
+a, .liste-dec{
      text-decoration: none;
      list-style: none;
  }

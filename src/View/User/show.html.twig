@@ -1,6 +1,24 @@
-<ul>
-    {% for playlist in playlists %}
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div>
+        <label for="choice">Trier par : </label>
+        <select name="choice" id="choice">
+            <option value="">Merci de choisir une option</option>
+            <option value="">Nom</option>
+            <option value="">Date</option>
+        </select>
+    </div>
+    <div class="container">
+        <div class="card border shadow-lg p-3 mb-5 bg-white rounded text-center mt-4" >
+            <div class="card-body">
+                <h5 class="card-title">Toutes les Playlists</h5>
+                <ul class="card-text">
+                    {% for playlist in playlists %}
+                        <li class="m-4 liste-dec"><a href="" class="">{{ playlist.name }} </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 
-        <li> {{ playlist.name }} </li>
-    {% endfor %}
-</ul>
+{% endblock %}
