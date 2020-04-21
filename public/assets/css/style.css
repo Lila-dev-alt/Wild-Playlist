@@ -43,3 +43,11 @@ a, .list-dec{
         border-top-color: white;
     }
 }
+.diagonal-bg{
+    position: fixed;
+    top:97px;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+
+}

@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div class="mt-4 ml-3">
+        <div class="btn btn-outline-warning shadow-sm rounded"><a href="/playlist/list/name" class="list-dec text-dark">Trier par Nom</a></div>
+        <div class="btn btn-outline-success shadow-sm rounded"><a href="/playlist/list/date" class="list-dec text-dark">Trier par Date</a></div>
+    </div>
+    <div class="container text-center">
+        <div class="card border shadow-lg p-3 mb-5 bg-white rounded text-center mt-4" >
+            <div class="card-body">
+                <h5 class="card-title text-danger">Les Playlists</h5>
+                <table class="table table-hover">
+                    <tbody>
+                        {% for playlist in playlists %}
+                            <tr>
+                                <th scope="row" class="list-dec text-left"><a href="/playlist/show/{{ playlist.id }}" class="text-dark">{{ playlist.name | capitalize}} </a></th>
+                                <th scope="row" class="list-dec"><a href="/playlist/show/{{ playlist.id }}" class="text-dark"><i class="fas fa-headphones"></i></a></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="diagonal-bg">
+        <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
+            <line x1='100%' y1='0' x2='1' y2='100%' stroke='#d91414' stroke-width='30%'/>
+        </svg>
+    </div>
+{% endblock %}
