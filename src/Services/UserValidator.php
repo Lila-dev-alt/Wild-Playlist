@@ -92,7 +92,7 @@ class UserValidator
         $userManager = new UserManager();
         $userExist = $userManager->selectOneByEmail($this->data['email']);
         if (count($userExist) > 0) {
-            $this->addErrors('email', 'Attention l\'email est déjà utilisé');
+            $this->addErrors('emaile', 'Attention l\'email est déjà utilisé');
         }
     }
     public function noError()

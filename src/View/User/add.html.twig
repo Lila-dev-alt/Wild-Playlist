@@ -20,6 +20,8 @@
                                            value="{% if  errors.email is not defined %}{{ user.email}}{% endif %}"/>
                                     {% if  errors.email is defined %}
                                         <div class="error-label">{{ errors.email }} </div>
+                                    {% elseif  errors.emaile is defined %}
+                                        <div class="error-label">{{ errors.emaile }} </div>
                                     {% endif %}
                                 </div>
                                 <div class="form-group">
@@ -39,3 +41,4 @@
         </div>
     </div>
 </div>
+
