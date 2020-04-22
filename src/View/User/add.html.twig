@@ -7,7 +7,7 @@
                     {{ no_error }}
                     <div class="row register-form">
                         <div class="col-md-6">    <!-- Laisse le twig stp quand tu changeras le bootsrap -->
-                            <form action = "/user/add" method="post">
+                            <form action = "/user/add" method="post"> <!-- Laisser cette partie  -->
                                 <div class="form-group">
                                     <input type="text" name="pseudo" class="form-control" placeholder="Pseudo*"
                                            value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}"  />

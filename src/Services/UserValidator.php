@@ -99,10 +99,12 @@ class UserValidator
     {
         $noError = "";
         if (count($this->errors) === 0) {
-            $noError = "Merci de vous être inscris. Veuillez-vous connecter";
+            $noError = "Merci de vous être inscrit. Veuillez-vous connecter";
         }
         return $noError;
     }
+
+
     public function clean($var)
     {
         return ucfirst($var);

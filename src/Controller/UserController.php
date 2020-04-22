@@ -26,14 +26,13 @@ class UserController extends AbstractController
             // Check if user is valid
             $validation = new UserValidator($user);
             $validation->validateForm();
-           // $noError = $validation->noError(); ne marche pas
+           $noError = $validation->noError();
             $user['pseudo'] = $validation->clean($user['pseudo']);
 
             // If no error, insert user in DB
             $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
             $userManager = new UserManager;
             $userManager->insert($user);
-            //$noError = $validation->noError();
         }
         //  header('Location:/home/index/' ); redirection
 
