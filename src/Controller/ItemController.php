@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: root
+ * Playlist: root
  * Date: 11/10/17
  * Time: 16:07
  * PHP version 7
@@ -50,7 +50,7 @@ class ItemController extends AbstractController
         $itemManager = new ItemManager();
         $item = $itemManager->selectOneById($id);
 
-        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
+        return $this->twig->render('Item/list.html.twig', ['item' => $item]);
     }
 
 

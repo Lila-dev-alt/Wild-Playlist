@@ -1,0 +1,96 @@
+
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="/assets/css/_inscriptionForm.css">
+{% endblock %}
+{% block content %}
+    <h3 class="container mt-5">
+        {{ no_error }}
+    </h3>
+    <div class="container login-forms mt-5 d-flex align-items-center flex-sm-column flex-md-column flex-lg-row">
+        <div class="col-md-6 mb-4">
+            <div class="card indigo form-white placeholder-up near-moon-gradient ">
+                <div class="card-body">
+                    <form action = "/user/add" method="post">
+                        <h2 class="text-center font-up font-bold py-4 text-white">Inscription</h2>
+                        <div class="md-form">
+                            <i class="fa fa-user prefix white-text"></i>
+                            <input type="text" name = "pseudo" id="orangeForm-name2" class="form-control labeleur"
+                                   value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}" >
+                            <label for="orangeForm-name2">Pseudo</label>
+                            {% if  errors.pseudo is defined %}
+                                <div class="error-label">{{ errors.pseudo }} </div>
+                            {% endif %}
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-envelope prefix white-text"></i>
+                            <input type="text" name = "email" id="orangeForm-email2"  class="form-control labeleur" value ="{% if  errors.email is not defined %}{{ user.email}}{% endif %}">
+                            <label for="orangeForm-email2">Email</label>
+                            {% if  errors.email is defined %}
+                                <div class="error-label">{{ errors.email }} </div>
+                            {% elseif  errors.emaile is defined %}
+                                <div class="error-label">{{ errors.emaile }} </div>
+                            {% endif %}
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix white-text"></i>
+                            <input type="password" name = "password" id="orangeForm-pass2" class="form-control labeleur"
+                                   value="{% if errors.password is not defined %}{{ user.password}}{% endif %}">
+                            <label for="orangeForm-pass2">Mot de passe</label>
+                            {% if  errors.password is defined %}
+                                <div class="error-label">{{ errors.password }} </div>
+                            {% endif %}
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-white waves-effect waves-light">Valider</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card pink form-white placeholder-up ripe-malinka-gradient">
+                <div class="card-body ">
+                    <form>
+                        <h2 class="text-center font-up font-bold text-white py-4">Connectez-vous !</h2>
+                        <div class="md-form">
+                            <i class="fa fa-user prefix white-text"></i>
+                            <input type="text" id="orangeForm-name3" class="form-control labeleur">
+                            <label for="orangeForm-name3">Pseudo</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix white-text"></i>
+                            <input type="password" id="orangeForm-pass3" class="form-control labeleur">
+                            <label for="orangeForm-pass3">Mot de passe</label>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-white ">
+                                Suivant
+                                <i class="fa fa-angle-double-right pl-2" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+<script>
+    let inputs = document.getElementsByClassName('labeleur');
+    for(let i = 0; i <inputs.length; i++) {
+        if (inputs[i].value !="" ) {
+            inputs[i].classList.add('active')
+        }
+    }
+    for(let i = 0; i <inputs.length; i++) {
+        inputs[i].addEventListener('change',(e)=> {
+            e.target.classList.add('active')
+        })
+    }
+</script>
+{% endblock%}
