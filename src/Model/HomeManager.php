@@ -17,17 +17,17 @@ class HomeManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectPlaylistsWithQuestionAndLimit(int $question, int $limit)
+    public function selectPlaylistsWithQuestionAndLimit(string $mainWord, int $limit) : array
     {
         return $this->pdo->query('
-            SELECT u.name user_name, s.url  FROM ' . $this->table . '
+            SELECT u.name user_name, s.url, q.content qContent  FROM ' . $this->table . '
             JOIN user u
             ON u.id=playlist.user_id
             JOIN song s 
             ON s.playlist_id = playlist.id
             JOIN question q
             ON q.id = s.question_id
-            WHERE q.id =' . $question . '
-            ORDER BY u.created_at DESC LIMIT ' . $limit)->fetchAll();
+            WHERE q.content LIKE \'%' . $mainWord .
+            '%\' ORDER BY u.created_at DESC LIMIT ' . $limit)->fetchAll();
     }
 }
