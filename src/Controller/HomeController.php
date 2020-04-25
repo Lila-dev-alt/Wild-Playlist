@@ -20,10 +20,16 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+    const PLAYLIST_NB_HOMEPAGE = 3 ;
+    const MAINWORD_HOMEPAGE_SELECTED_PLAYLISTS= 'temps';
+
     public function index() : string
     {
         $homeManager = new HomeManager();
-        $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(1, 3);
+        $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(
+            self::MAINWORD_HOMEPAGE_SELECTED_PLAYLISTS,
+            self::PLAYLIST_NB_HOMEPAGE
+        );
         return $this->twig->render('Home/index.html.twig', [
             'playlists'=>$playlists,
         ]);
