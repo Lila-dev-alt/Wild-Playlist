@@ -50,6 +50,10 @@ a, .list-dec{
     height: 100%;
 }
 
+.no-error {
+    text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
     .media iframe {
         width: 250px;
