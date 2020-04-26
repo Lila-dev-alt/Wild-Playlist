@@ -23,7 +23,7 @@ class UserValidator
     {
         foreach (self::$fields as $field) {
             if (!array_key_exists($field, $this->data)) {
-                trigger_error("$field is not present in data");
+                trigger_error($field . ' is not present in data');
                 return;
             }
         }

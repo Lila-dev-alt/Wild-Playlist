@@ -6,9 +6,14 @@
     <link rel="stylesheet" href="/assets/css/_inscriptionForm.css">
 {% endblock %}
 {% block content %}
-    <h3 class="container mt-5">
-        {{ no_error }}
-    </h3>
+    {% if  no_error is defined %}
+        <div class="alert alert-success alert-dismissible fade show col-md-offset-4 no-error" role="alert">
+            <strong>{{ no_error }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
     <div class="container login-forms mt-5 d-flex align-items-center flex-sm-column flex-md-column flex-lg-row">
         <div class="col-md-6 mb-4">
             <div class="card indigo form-white placeholder-up near-moon-gradient ">
@@ -18,7 +23,7 @@
                         <div class="md-form">
                             <i class="fa fa-user prefix white-text"></i>
                             <input type="text" name = "pseudo" id="orangeForm-name2" class="form-control labeleur"
-                                   value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}" >
+                                   value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}" required >
                             <label for="orangeForm-name2">Pseudo</label>
                             {% if  errors.pseudo is defined %}
                                 <div class="error-label">{{ errors.pseudo }} </div>
@@ -80,17 +85,7 @@
 
 {% endblock %}
 {% block js %}
-<script>
-    let inputs = document.getElementsByClassName('labeleur');
-    for(let i = 0; i <inputs.length; i++) {
-        if (inputs[i].value !="" ) {
-            inputs[i].classList.add('active')
-        }
-    }
-    for(let i = 0; i <inputs.length; i++) {
-        inputs[i].addEventListener('change',(e)=> {
-            e.target.classList.add('active')
-        })
-    }
-</script>
+
+    <script type="text/javascript" src="/assets/js/form.js"></script>
+
 {% endblock%}

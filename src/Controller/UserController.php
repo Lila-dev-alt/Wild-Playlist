@@ -25,25 +25,36 @@ class UserController extends AbstractController
 
             // Check if user is valid
             $validation = new UserValidator($user);
+            $user['pseudo'] = $validation->clean($user['pseudo']);
             $validation->validateForm();
             $errors = $validation->getErrors();
             $noError = $validation->noError();
-            $user['pseudo'] = $validation->clean($user['pseudo']);
-
             // If no error, insert user in DB
             if ($noError != "") {
                 $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
                 $userManager = new UserManager;
                 $userManager->insert($user);
+                header('Location:/user/login/?' . http_build_query(['no_error' =>$noError]) );
+                exit;
             }
         }
-        //  header('Location:/home/index/' ); redirection
 
         return $this->twig->render('User/add.html.twig', [
             'errors' => $errors,
             'user' => $user,
-            'no_error'=> $noError,
 
         ]); //page twig
+    }
+
+
+    public function login()
+    {
+
+
+        return $this->twig->render('User/add.html.twig', [
+
+            'no_error' => $_GET['no_error'],
+        ]);
+
     }
 }
