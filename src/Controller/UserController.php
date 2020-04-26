@@ -25,11 +25,10 @@ class UserController extends AbstractController
 
             // Check if user is valid
             $validation = new UserValidator($user);
+            $user['pseudo'] = $validation->clean($user['pseudo']);
             $validation->validateForm();
             $errors = $validation->getErrors();
             $noError = $validation->noError();
-            $user['pseudo'] = $validation->clean($user['pseudo']);
-
             // If no error, insert user in DB
             if ($noError != "") {
                 $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
