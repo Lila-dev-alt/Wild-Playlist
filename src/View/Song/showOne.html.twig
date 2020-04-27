@@ -5,12 +5,13 @@
         <h2 class="text-center pt-5 mb-5">{{ songs[0].playlistName | capitalize}}</h2>
         <ul>
             {% for song in songs%}
-                <li class="d-flex justify-content-between mb-5 pb-4  ">
-                    <div class="text-center mt-5">
-                        <h4><a href="{{ song.url }}" target="_blank" class="text-decoration-none text-dark">{{ song.songName | capitalize }}</a></h4>
+                <li class="d-flex justify-content-between align-items-center flex-wrap mb-5 pb-4 song  border border-white rounded iframeHover" title="Cliquez pour faire apparaitre le clip">
+                    <div class="text-center m-5">
+                        <h4>{{ song.songName | capitalize }} <small><i class="fas fa-angle-right ml-5"></i></small></h4>
+                            <!--<a href="{{ song.url }}" target="_blank" class="text-decoration-none text-dark song">{{ song.songName | capitalize }}</a>-->
                         <p>{{ song.content }}</p>
                     </div>
-                    <iframe width="560" height="315" src="{{ song.url }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="{{ song.url }}" class="hidden" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </li>
             {% endfor %}
         </ul>
@@ -18,5 +19,9 @@
     <div class="diagonal-bg">
         <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><line x1='100%' y1='0' x2='1' y2='100%' stroke='#038c5a' stroke-width='30%'/></svg>
     </div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="/assets/js/iframeNotHidden.js"></script>
 
 {% endblock %}
