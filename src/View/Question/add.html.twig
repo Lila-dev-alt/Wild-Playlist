@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig'  %}
+{% block content %}
+    <div class="row justify-content-md-center">
+    <form action="/question/add" method="post">
+        <div class="">
+            <label for="addQuestion">Quel est votre : </label>
+            <input type="text" id="addQuestion" name="content" placeholder="chanson pour faire la fête">
+        </div>
+        <div class="">
+            <button type="submit">Suggérer ma question !</button>
+        </div>
+    </form>
+    </div>
+{% endblock %}
