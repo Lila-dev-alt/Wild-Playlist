@@ -1,0 +1,16 @@
+.hidden{
+    display: none;
+}
+.iframeCardHover:hover{
+    background-color: goldenrod ;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 992px) {
+    .song iframe {
+        width: 250px;
+        height: 150px;
+        border-top-color: white;
+    }
+}

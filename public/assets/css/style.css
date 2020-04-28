@@ -61,11 +61,3 @@ a, .list-dec{
         border-top-color: white;
     }
 }
-
-.hidden{
-    display: none;
-}
-.iframeHover:hover{
-    background-color: goldenrod ;
-    cursor: pointer;
-}
