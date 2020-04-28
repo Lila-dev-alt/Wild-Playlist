@@ -29,10 +29,7 @@ a, .list-dec{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2) !important;
 }
 
-/* NO BORDER ON HOMEPAGE IFRAMES*/
-.media iframe {
-    border:none;
-}
+
 /* FOOTER */
 .footer{
     height: 20vh;
@@ -54,10 +51,3 @@ a, .list-dec{
     text-align: center;
 }
 
-@media screen and (max-width: 1000px) {
-    .media iframe {
-        width: 250px;
-        height: 150px;
-        border-top-color: white;
-    }
-}

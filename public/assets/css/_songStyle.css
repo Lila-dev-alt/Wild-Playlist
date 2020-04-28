@@ -1,6 +1,9 @@
 .hidden{
     display: none;
 }
+.display{
+    display: block;
+}
 .iframeCardHover:hover{
     background-color: goldenrod ;
     cursor: pointer;

@@ -14,7 +14,7 @@
                         <h4>{{ song.songName | capitalize }} <small><i class="fas fa-angle-right"></i></small></h4>
                         <p>{{ song.content }}</p>
                     </div>
-                    <iframe width="560" height="315" src="{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </li>
             {% endfor %}
         </ul>
