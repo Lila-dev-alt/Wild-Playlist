@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+ <form action="" method="post">
+   <div>
+     <label for="playlistName">Nom de le playlist :</label>
+     <input type="text" name="playlistName" placeholder="">
+   </div>
+   {% for question in questions %}
+     <div>
+        <label for="urlQ">Quelle est votre {{question.content}} ?</label>
+        <input type="url" name="urlQ{{ question.id }}" id="urlQ{{ question.id }}" placeholder="https://www.youtube.com/watch?v=UqyT8IEBkvY">
+         <input id="questionId" name="questionId" type="hidden" value="{{ question.id }}">
+    </div>
+       <div>
+           <label for="songName">Un petit nom pour votre chanson ?</label>
+           <input type="text" name="songName{{  question.id }}" id="songName{{  question.id }}">
+       </div>
+   {% endfor %}
+     <button type="submit" name="ajouter">Ajouter !</button>
+ </form>
+{% endblock %}
