@@ -28,10 +28,24 @@
                     <a class="nav-link blue-hover text-right"  href="/playlist/list/name">Trouver une playlist</a>
                 </li>
             </ul>
-            <div class="d-flex nav-item navbar-nav">
-                <a class=" mr-3 nav-link green-hover text-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Inscription</a>
-                <a class=" mr-3 nav-link purple-hover text-right" href="/user/add"><span><i class="fas fa-sign-in-alt"></i></span> Connexion</a>
-            </div>
+            {% if session.username is defined %}
+                {% if session.admin != '1' %}
+                    <div class="d-flex nav-item navbar-nav">
+                        <a class=" mr-3 nav-link green-hover text-sm-right" href="#"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant que {{ session.username | capitalize }}</a>
+                        <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
+                    </div>
+                {% else %}
+                    <div class="d-flex nav-item navbar-nav">
+                        <a class=" mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant qu'admin {{ session.username | capitalize }} </a>
+                        <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="d-flex nav-item navbar-nav">
+                    <a class=" mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Inscription</a>
+                    <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/login"><span><i class="fas fa-sign-in-alt"></i></span> Connexion</a>
+                </div>
+            {% endif %}
         </div>
     </nav>
 {% endblock %}

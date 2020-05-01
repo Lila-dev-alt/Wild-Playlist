@@ -6,14 +6,22 @@
     <link rel="stylesheet" href="/assets/css/_inscriptionForm.css">
 {% endblock %}
 {% block content %}
-    {% if  no_error is defined %}
-        <div class="alert alert-success alert-dismissible fade show col-md-offset-4 no-error" role="alert">
-            <strong>{{ no_error }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endif %}
+            {% if  error is defined and error is not empty%}
+                <div class="alert alert-success alert-dismissible fade show col-md-offset-4 no-error" role="alert">
+                <strong>{{ error }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endif %}
+            {% if  success is defined and success is not empty %}
+                <div class="alert alert-success alert-dismissible fade show col-md-offset-4 no-error" role="alert">
+                     <strong>{{ success }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
     <div class="container login-forms mt-5 d-flex align-items-center flex-sm-column flex-md-column flex-lg-row">
         <div class="col-md-6 mb-4">
             <div class="card indigo form-white placeholder-up near-moon-gradient ">
@@ -23,10 +31,13 @@
                         <div class="md-form">
                             <i class="fa fa-user prefix white-text"></i>
                             <input type="text" name = "pseudo" id="orangeForm-name2" class="form-control labeleur"
-                                   value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}" required >
+                                   value= "{% if errors.pseudo is not defined %}{{ user.pseudo}}{% endif %}"  >
                             <label for="orangeForm-name2">Pseudo</label>
                             {% if  errors.pseudo is defined %}
                                 <div class="error-label">{{ errors.pseudo }} </div>
+                            {% endif %}
+                            {% if  errors.pseudos is defined %}
+                                <div class="error-label">{{ errors.pseudos }} </div>
                             {% endif %}
                         </div>
                         <div class="md-form">
@@ -59,16 +70,16 @@
         <div class="col-md-6 mb-4">
             <div class="card pink form-white placeholder-up ripe-malinka-gradient">
                 <div class="card-body ">
-                    <form>
+                    <form action = "/user/check" method="post">
                         <h2 class="text-center font-up font-bold text-white py-4">Connectez-vous !</h2>
                         <div class="md-form">
                             <i class="fa fa-user prefix white-text"></i>
-                            <input type="text" id="orangeForm-name3" class="form-control labeleur">
+                            <input type="text" name="username"  id="orangeForm-name3" class="form-control labeleur">
                             <label for="orangeForm-name3">Pseudo</label>
                         </div>
                         <div class="md-form">
                             <i class="fa fa-lock prefix white-text"></i>
-                            <input type="password" id="orangeForm-pass3" class="form-control labeleur">
+                            <input type="password" name="passwordConnec" id="orangeForm-pass3" class="form-control labeleur">
                             <label for="orangeForm-pass3">Mot de passe</label>
                         </div>
                         <div class="text-center">
