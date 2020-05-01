@@ -25,7 +25,6 @@ class UserController extends AbstractController
 
             // Check if user is valid
             $validation = new UserValidator($user);
-            $user['pseudo'] = $validation->clean($user['pseudo']);
             $validation->validateForm();
             $errors = $validation->getErrors();
             $noError = $validation->noError();

@@ -31,6 +31,7 @@ class UserValidator
         $this->validateEmail();
         $this->validatePassword();
         $this->checkIfEmailUsed();
+        $this->checkIfUsernameIsUsed();
         return $this->errors;
     }
 
@@ -95,6 +96,18 @@ class UserValidator
             $this->addErrors('emaile', 'Attention l\'email est déjà utilisé');
         }
     }
+
+
+    private function checkIfUsernameIsUsed()
+    {
+        $userManager = new UserManager();
+        $usernameExist = $userManager->selectOneByUsername($this->data['pseudo']);
+        if ($usernameExist) {
+            $this->addErrors('pseudos', 'Attention ce pseudo est déjà utilisé !');
+        }
+    }
+
+
     public function noError()
     {
         $noError = "";
@@ -105,8 +118,4 @@ class UserValidator
     }
 
 
-    public function clean($var)
-    {
-        return ucfirst($var);
-    }
 }
