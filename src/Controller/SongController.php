@@ -3,8 +3,10 @@
 
 namespace App\Controller;
 
+use App\Model\PlaylistManager;
 use App\Model\SongManager;
 use App\Model\QuestionManager;
+use App\Services\PlaylistValidator;
 
 class SongController extends AbstractController
 {
@@ -25,19 +27,36 @@ class SongController extends AbstractController
     }
     public function add()
     {
+        $errors= [];
         $questionManager = new QuestionManager();
         $questions = $questionManager->selectAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST);
+            //commented because of grumphp $playlistManager= new PlaylistManager();
             // Prepare user array from POST data
-
             //récup user_id
+            $playlist= [
+                'name' => $_POST['playlistName'],
+                'user_id' => $_SESSION['id'],
+            ];
 
+            $validator= new PlaylistValidator();
+            $validator->validatePlaylistName($playlist['name']);
+            $errors= $validator->getErrors();
             //insert PL (PL name, user_id)
+            //validator name
+
+            /** commented beacause of grumphp
+              if (empty($errors)){
+                $playlistId = $playlistManager->insertOnePlaylist($playlist);
+            }
+              **/
 
             //FormValidator (url+namePL)
             //Insert ds song (name, url, pl_id, Q_id)
         }
-        return $this->twig->render('Song/add.html.twig', ['questions' => $questions]);
+        return $this->twig->render('Song/add.html.twig', [
+            'questions' => $questions,
+            'errors' => $errors,
+            ]);
     }
 }

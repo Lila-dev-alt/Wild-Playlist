@@ -44,7 +44,7 @@ class UserValidator
             if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $val)) {
                 $this->addErrors(
                     'pseudo',
-                    'Le pseudo doit être entre 6 et 12 charactères avec des chiffres et lettres seulement'
+                    'Le pseudo doit être entre 6 et 12 caractères avec des chiffres et lettres seulement'
                 );
             }
         }

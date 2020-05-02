@@ -50,7 +50,7 @@ class ItemController extends AbstractController
         $itemManager = new ItemManager();
         $item = $itemManager->selectOneById($id);
 
-        return $this->twig->render('Item/list.html.twig', ['item' => $item]);
+        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
     }
 
 

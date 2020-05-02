@@ -28,8 +28,3 @@
 {% block js %}
     <script type="text/javascript" src="/assets/js/iframeNotHidden.js"></script>
 {% endblock %}
-<script>
-$(window).scroll(function() {
-var scroll = $(window).scrollTop();
-$(".diagonal-bg svg line").attr("stroke-width",  ((30 + scroll/10)  + "%"));});
-</script>

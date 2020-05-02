@@ -6,6 +6,9 @@
          <div class="form-group">
              <label for="playlistName">Nom de le playlist :</label>
              <input type="text" name="playlistName">
+             {% if errors.playlistName is defined %}
+                 <div class="alert alert-warning">{{ errors.playlistName }} </div>
+             {% endif %}
          </div>
          {% for question in questions %}
          <div class="form-group mt-5 p-5 rounded border border-warning shadow d-flex flex-column container">
