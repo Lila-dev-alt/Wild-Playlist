@@ -11,7 +11,7 @@
          <div class="form-group mt-5 p-5 rounded border border-warning shadow d-flex flex-column container">
              <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
              <label for="urlQ"><i class="fas fa-music"></i>  Quelle est votre {{question.content}} ?  <i class="fas fa-music"></i></label>
-             <input type="url" class="border-radius"  name="urlQ{{ question.id }}" id="urlQ{{ question.id }}">
+             <input type="url" name="urlQ{{ question.id }}" id="urlQ{{ question.id }}">
              <label for="songName">Un petit nom pour cette chanson ?</label>
              <input type="text" name="songName{{  question.id }}" id="songName{{  question.id }}">
             </div>

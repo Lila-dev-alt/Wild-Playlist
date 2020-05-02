@@ -25,7 +25,8 @@ a, .list-dec{
     font-weight: bold;
     color: #7E338F;
 }
-.media:hover, .form-group:hover {
+
+.media:hover, .form-group:hover, .shadow-lg input:hover {
     box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
 
