@@ -1,32 +1,21 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
- <form action="" method="post" class="container shadow-lg  rounded text-center bg-white mb-5">
-     <fieldset>
-         <legend>Création de Playlist :</legend>
-         <div class="form-group">
-             <label for="playlistName">Nom de le playlist :</label>
-             <input type="text" name="playlistName">
-             <button type="submit" name="ajouterPL" class="btn btn-outline-success btn-lg m-5">Ajouter ! <i class="far fa-paper-plane"></i></button>
-             {% if errors.playlistName is defined %}
-                 <div class="alert alert-warning">{{ errors.playlistName }} </div>
-             {% endif %}
-         </div>
+    <form action="" method="post" class="container shadow-lg  rounded text-center bg-white pt-3 mb-5">
          {% for question in questions %}
          <div class="form-group mt-5 p-5 rounded border border-warning shadow containe d-flex justify-content-around align-items-center">
              <div>
                  <div class="m-5">
-                     <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
                      <label for="urlQ"><i class="fas fa-music"></i>  Quelle est votre {{question.content}} ?  <i class="fas fa-music"></i></label>
-                     <input type="url" name="urlQ{{ question.id }}" id="urlQ{{ question.id }}">
+                     <input type="url" name="{{ question.id }}" id="urlQ{{ question.id }}">
+                     <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
                  </div>
-                 <div>
+                 <!--<div>
                      <label for="songName">Un petit nom pour cette chanson ?</label>
-                     <input type="text" name="songName{{  question.id }}" id="songName{{  question.id }}">
-                 </div>
+                     <input type="text" name="{{  question.id }}" id="songName{{  question.id }}">
+                 </div>-->
              </div>
          </div>
          {% endfor %}
-     </fieldset>
      <button type="submit" name="ajouter" class="btn btn-outline-success btn-lg m-5">Ajouter ! <i class="far fa-paper-plane"></i></button>
  </form>
     <div class="wave-container">

@@ -32,38 +32,64 @@ class SongController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function add()
+    public function addName()
     {
         $errors= [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['ajouterPL'])) {
+                //récup user_id
+                //validator name
+                $validator = new PlaylistValidator();
+                $playlistManager= new PlaylistManager();
+                $playlistName = $validator->cleanInput($_POST['playlistName']);
+                $playlist = [
+                    'name' => $playlistName,
+                    'user_id' => $_SESSION['id'],
+                ];
+                $validator->validatePlaylistName($playlist['name']);
+                $errors = $validator->getErrors();
+                //insert PL (PL name, user_id)
+                if (empty($errors)) {
+                    $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
+                    header('Location: /song/add');
+                }
+                $_SESSION['playlistInAdding']= $playlist;
+            }
+        }
+        return $this->twig->render('Song/addPL.html.twig', [
+            'errors' => $errors,
+        ]);
+    }
+
+    public function add()
+    {
+        $errors=[];
         //select Questions
         $questionManager = new QuestionManager();
         $questions = $questionManager->selectAll();
+        //FormValidator (url+namePL)
+        //Insert ds song (name, url, pl_id, Q_id)
+        $playlist=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //Prepare user array from POST data
-            //récup user_id
-            //validator name
-            $playlistManager= new PlaylistManager();
-            $validator= new PlaylistValidator();
-            $playlistName = $validator->cleanInput($_POST['playlistName']);
-            $playlist= [
-                'name' => $playlistName,
-                'user_id' => $_SESSION['id'],
-            ];
-            $validator->validatePlaylistName($playlist['name']);
-            $errors= $validator->getErrors();
-            //insert PL (PL name, user_id)
-            if (empty($errors)) {
-                //commented because of grumphp $playlistId =
-                    $playlistManager->insertOnePlaylist($playlist);
+            foreach ($_POST as $input => $value) {
+                if (!is_string($input)) {
+                    $playlist[$input]['question_id'] = $input;
+                    $playlist[$input]['url'] = $value;
+                }
             }
-              var_dump($_POST);
-
-            //FormValidator (url+namePL)
-            //Insert ds song (name, url, pl_id, Q_id)
+            $songManager = new SongManager();
+            if (!empty($playlist)) {
+                foreach ($playlist as $song) {
+                    $playlistId = $_SESSION['playlistInAdding']['playlist_id'];
+                    $songManager->insertSong($song, $playlistId);
+                }
+            }
         }
+
         return $this->twig->render('Song/add.html.twig', [
             'questions' => $questions,
             'errors' => $errors,
-            ]);
+        ]);
     }
 }

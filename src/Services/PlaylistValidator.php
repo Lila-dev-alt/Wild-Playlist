@@ -33,7 +33,6 @@ class PlaylistValidator
         return trim(filter_var($string, FILTER_SANITIZE_STRING));
     }
 
-
     private function addErrors($key, $value)
     {
         $this->errors[$key] = $value;
