@@ -55,8 +55,6 @@ class ItemController extends AbstractController
 
 
     /**
-     * Display item edition page specified by $id
-     *
      * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError

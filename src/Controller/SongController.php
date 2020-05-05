@@ -3,7 +3,9 @@
 
 namespace App\Controller;
 
+
 use App\Model\PlaylistManager;
+use App\Model\CommentManager;
 use App\Model\SongManager;
 use App\Model\QuestionManager;
 use App\Services\PlaylistValidator;
@@ -22,14 +24,30 @@ class SongController extends AbstractController
 
     public function showOne($userName)
     {
+
         $message=[];
+        $errorComments = [
+            'tooLong' => ''
+        ];
         $songManager= new SongManager();
+        $commentManager = new CommentManager();
         $songs= $songManager->showByName($userName);
+
         if (isset($_GET['added'])) {
             $message['added']='Playlist ajoutée avec succès';
         }
-        return  $this->twig->render('Song/showOne.html.twig', ['songs' => $songs,
+        
+        $comments = $commentManager->selectComments($songs[0]['playlistId']);
+        if ($_GET) {
+            if (array_key_exists("tooLong", $_GET)) {
+                $errorComments["tooLong"] = $_GET['tooLong'];
+            }
+        }
+        return $this->twig->render('Song/showOne.html.twig', ['songs' => $songs,
+            'comments' => $comments,
             'message'=>$message,
+            'username' => $userName,
+            'errorComments'=>$errorComments
         ]);
     }
 
@@ -80,14 +98,7 @@ class SongController extends AbstractController
                     if (!empty($playlist) && !empty($songs)) {
                         $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
                         $playlistId = $playlist['playlist_id'];
-                        /**
-                         * if (!empty($playlist) && !empty($songs)) {
-                        $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
-                        $playlistId = $playlist['playlist_id'];
-                        foreach ($songs as $song) {
-                        $songManager->insertSong($song, $playlistId);
-                        }
-                         * **/
+                      
                         foreach ($songs as $song) {
                             $parsedUrl= parse_url($song['url'], PHP_URL_QUERY);
                             $song['url']= substr($parsedUrl, 2, 11);

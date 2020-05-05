@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
-    {% block stylesheet %}{% endblock %}
+    {% block stylesheet %} {% endblock %}
 </head>
 <body>
 {% block navbar %}
-   <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
         <a class="navbar-brand" href="/home/index"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,6 @@
         </div>
     </nav>
 {% endblock %}
-<h1 class="text-center mt-3 text-danger">Wild Playlist</h1>
 {% block content %}{% endblock %}
 {% block footer %}
     <footer class=" container-fluid footer border-top border-success">
@@ -94,5 +93,3 @@
 <script src="/assets/js/scroll.js"></script>
 </body>
 </html>
-
-

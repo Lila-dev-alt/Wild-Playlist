@@ -25,7 +25,7 @@ class SongManager extends AbstractManager
     public function showByName(string $name)
     {
         $statement = $this->pdo->prepare("SELECT song.id, song.name AS songName, song.url, 
-            p.name AS playlistName, u.name, q.content 
+            p.name AS playlistName,p.id AS playlistId, u.name, q.content 
             FROM " . self::TABLE .
             " JOIN playlist  p ON p.id = song.playlist_id
             JOIN user u ON u.id = p.user_id
