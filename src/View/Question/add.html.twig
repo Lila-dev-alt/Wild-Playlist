@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig'  %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/_addQuestionForm.css">
+{% endblock %}
+{% block content %}
+    <div class="login">
+        <div class="account-login">
+            <h1>Ajout de question</h1>
+            <form action="/question/add" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="addQuestion">Question : </label>
+                    <input type="text" id="addQuestion" name="content" placeholder="exemple: votre chanson du moment " class="form-control">
+                </div>
+                <button class="btn" type="submit">Ajouter !</button>
+            </form>
+        </div>
+    </div>
+    {% if error.erreur is defined %}
+        <div class="alert alert-warning">{{ error.erreur }} </div>
+    {% endif %}
+{% endblock %}
