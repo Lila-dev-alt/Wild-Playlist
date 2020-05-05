@@ -3,10 +3,6 @@
 
 namespace App\Model;
 
-
-/**
- *
- */
 class QuestionManager extends AbstractManager
 {
     /**
@@ -21,7 +17,6 @@ class QuestionManager extends AbstractManager
     {
         parent::__construct(self::TABLE);
     }
-
 
     /**
      * @param array $question
