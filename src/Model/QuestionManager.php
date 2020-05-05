@@ -18,6 +18,7 @@ class QuestionManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+
     public function insert(array $question)
     {
         // prepared request
@@ -25,4 +26,5 @@ class QuestionManager extends AbstractManager
         $statement->bindValue('content', $question['content'], \PDO::PARAM_STR);
         $statement->execute();
     }
+
 }

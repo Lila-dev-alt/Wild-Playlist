@@ -15,11 +15,11 @@ class UserManager extends AbstractManager
     public function selectOneByEmail(string $email)
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE email=:email");
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE email=:email LIMIT 1");
         $statement->bindValue('email', $email, \PDO::PARAM_STR);
         $statement->execute();
 
-        return $statement->fetchAll();
+        return $statement->fetch();
     }
 
 
@@ -33,4 +33,14 @@ class UserManager extends AbstractManager
 
        $statement->execute();
     }
+    public function selectOneByUsername(string $pseudo)
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE name=:name LIMIT 1");
+        $statement->bindValue('name', $pseudo, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
 }
