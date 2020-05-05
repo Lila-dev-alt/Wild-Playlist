@@ -25,14 +25,11 @@ a, .list-dec{
     font-weight: bold;
     color: #7E338F;
 }
-.media:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2) !important;
+
+.media:hover, .form-group:hover, .shadow-lg input:hover {
+    box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
 
-/* NO BORDER ON HOMEPAGE IFRAMES*/
-.media iframe {
-    border:none;
-}
 /* FOOTER */
 .footer{
     height: 20vh;
@@ -50,14 +47,17 @@ a, .list-dec{
     height: 100%;
 }
 
+.wave-container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+    top: 97px;
+}
+
 .no-error {
     text-align: center;
 }
 
-@media screen and (max-width: 1000px) {
-    .media iframe {
-        width: 250px;
-        height: 150px;
-        border-top-color: white;
-    }
-}
+
+

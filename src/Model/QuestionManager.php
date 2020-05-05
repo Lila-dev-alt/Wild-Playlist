@@ -1,11 +1,12 @@
 <?php
 
-
 namespace App\Model;
+
 
 /**
  *
  */
+
 class QuestionManager extends AbstractManager
 {
     /**
@@ -21,7 +22,6 @@ class QuestionManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
     /**
      * @param array $question
      * @return int
@@ -31,13 +31,11 @@ class QuestionManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`content`) VALUES (:content)");
         $statement->bindValue('content', $question['content'], \PDO::PARAM_STR);
-
-        if ($statement->execute()) {
+     if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
     }
-
-
+  
     /**
      * @param int $id
      */
@@ -48,7 +46,6 @@ class QuestionManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
-
 
     /**
      * @param array $question
