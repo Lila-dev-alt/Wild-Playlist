@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+ <form action="" method="post" class="container shadow-lg  rounded text-center bg-white mb-5">
+     <fieldset>
+         <legend>Création de Playlist :</legend>
+         <div class="form-group">
+             <label for="playlistName">Nom de le playlist :</label>
+             <input type="text" name="playlistName">
+         </div>
+         {% for question in questions %}
+         <div class="form-group mt-5 p-5 rounded border border-warning shadow d-flex flex-column container">
+             <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
+             <label for="urlQ"><i class="fas fa-music"></i>  Quelle est votre {{question.content}} ?  <i class="fas fa-music"></i></label>
+             <input type="url" name="urlQ{{ question.id }}" id="urlQ{{ question.id }}">
+             <label for="songName">Un petit nom pour cette chanson ?</label>
+             <input type="text" name="songName{{  question.id }}" id="songName{{  question.id }}">
+            </div>
+         {% endfor %}
+     </fieldset>
+     <button type="submit" name="ajouter" class="btn btn-outline-success btn-lg m-5">Ajouter ! <i class="far fa-paper-plane"></i></button>
+ </form>
+    <div class="wave-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffb6c1" fill-opacity="1" d="M0,288L1440,224L1440,0L0,0Z"></path>
+        </svg>
+    </div>
+
+{% endblock %}
+
+
