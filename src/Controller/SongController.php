@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Model\CommentManager;
 use App\Model\SongManager;
 use App\Model\QuestionManager;
 
@@ -19,9 +20,23 @@ class SongController extends AbstractController
 
     public function showOne($userName)
     {
+        $errorComments = [
+            'tooLong' => ''
+        ];
         $songManager= new SongManager();
+        $commentManager = new CommentManager();
         $songs= $songManager->showByName($userName);
-        return  $this->twig->render('Song/showOne.html.twig', ['songs' => $songs]);
+        $comments = $commentManager->selectComments($songs[0]['playlistId']);
+        if ($_GET) {
+            if (array_key_exists("tooLong", $_GET)) {
+                $errorComments["tooLong"] = $_GET['tooLong'];
+            }
+        }
+        return $this->twig->render('Song/showOne.html.twig', ['songs' => $songs,
+            'comments' => $comments,
+            'username' => $userName,
+            'errorComments'=>$errorComments
+        ]);
     }
     public function add()
     {
