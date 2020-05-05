@@ -77,6 +77,6 @@ class QuestionController extends AbstractController
         }
         return $this->twig->render('question/add.html.twig', [
             'error' => $error,
-        ]);
+            ]);
     }
 }
