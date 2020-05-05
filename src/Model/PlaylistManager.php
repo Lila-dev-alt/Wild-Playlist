@@ -19,7 +19,6 @@ class PlaylistManager extends AbstractManager
     }
     public function insertOnePlaylist(array $playlist)
     {
-
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (name, user_id) VALUES (:name, :user_id)");
         $statement->bindValue('name', $playlist['name'], \PDO::PARAM_STR);
         $statement->bindValue('user_id', $playlist['user_id'], \PDO::PARAM_INT);

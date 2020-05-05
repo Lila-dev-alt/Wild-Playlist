@@ -45,4 +45,30 @@ class PlaylistValidator
     {
         return $this->errors;
     }
+    public function cleanUrl(string $songUrl):string
+    {
+        $val = trim($songUrl);
+        $parsedUrl = parse_url($val, PHP_URL_QUERY);
+        $id = substr($parsedUrl, 2, 11);
+        return $id;
+    }
+
+    public function validateUrlSong($song)
+    {
+        $val = trim($song);
+        $parsedUrl = parse_url($val, PHP_URL_QUERY);
+        $id = substr($parsedUrl, 2, 11);
+
+        //not empty
+        if (empty($val)) {
+            $this->addErrors('urlSong', 'l\'url de la chanson ne peut pas être vide');
+            //verify youtube url  and id length
+        } elseif (!preg_match('@^(?:https://(?:www\\.)?youtube.com/)(watch\\?v=)([a-zA-Z0-9]*)@', $val)
+            || strlen($id) != 11) {
+            $this->addErrors('ulrSong2', 'Merci d\'entrer une URL conforme ex:
+             \'https://www.youtube.com/watch?v=2Vv-BfVoq4g\'');
+        }
+
+        return $this->errors;
+    }
 }
