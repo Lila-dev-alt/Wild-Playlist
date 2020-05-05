@@ -49,44 +49,57 @@ class SongController extends AbstractController
         $errors=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //VERIFY IF PL ALREADY EXISTS
-
-            //récup user_id+validator name
             $validator = new PlaylistValidator();
-            $playlistName = $validator->cleanInput($_POST['name']);
-            $playlist = [
-                'name' => $playlistName,
-                'user_id' => $_SESSION['id'],
-            ];
-            $validator->validatePlaylistName($playlist['name']);
-            $errors['playlistName'] = $validator->getErrors();
-            //FormValidator (url)
-            $validation = new PlaylistValidator();
-            foreach ($_POST as $input => $value) {
-                if (!is_string($input)) {
-                    $songs[$input]['question_id'] = $input;
-                     $songs[$input]['url'] = $value;
-                     $validation->validateUrlSong($songs[$input]['url']);
-                     $errors['url'] = $validation->getErrors();
-                }
-            }
-
-            //if no error
-            //insert PL (PL name, user_id)
-            // Insert ds song (name, url, pl_id, Q_id)
-            if (empty($errors['playlistName'])&& empty($errors['url'])) {
-                $songManager = new SongManager();
-                $playlistManager = new PlaylistManager();
-                if (!empty($playlist) && !empty($songs)) {
-                    $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
-                    $playlistId = $playlist['playlist_id'];
-                    foreach ($songs as $song) {
-                        $songManager->insertSong($song, $playlistId);
+            $checkUserPlaylist = $validator->checkIfUserHasPlaylist($_SESSION['id']);
+            if (empty($checkUserPlaylist)) {
+                //récup user_id+validator name
+                $playlistName = $validator->cleanInput($_POST['name']);
+                $playlist = [
+                    'name' => $playlistName,
+                    'userId' => $_SESSION['id'],
+                ];
+                $validator->validatePlaylistName($playlist['name']);
+                $errors['playlistName'] = $validator->getErrors();
+                //FormValidator (url)
+                $validation = new PlaylistValidator();
+                foreach ($_POST as $input => $value) {
+                    if (!is_string($input)) {
+                        $songs[$input]['question_id'] = $input;
+                        $songs[$input]['url'] = $value;
+                        $validation->validateUrlSong($songs[$input]['url']);
+                        $errors['url'] = $validation->getErrors();
                     }
-                    header('Location: /song/showone/' . $_SESSION['username'] . '/?added=ok');
                 }
+
+                //if no error
+                //insert PL (PL name, user_id)
+                // Insert ds song (name, url, pl_id, Q_id)
+                if (empty($errors['playlistName']) && empty($errors['url'])) {
+                    $songManager = new SongManager();
+                    $playlistManager = new PlaylistManager();
+                    if (!empty($playlist) && !empty($songs)) {
+                        $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
+                        $playlistId = $playlist['playlist_id'];
+                        /**
+                         * if (!empty($playlist) && !empty($songs)) {
+                        $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
+                        $playlistId = $playlist['playlist_id'];
+                        foreach ($songs as $song) {
+                        $songManager->insertSong($song, $playlistId);
+                        }
+                         * **/
+                        foreach ($songs as $song) {
+                            $parsedUrl= parse_url($song['url'], PHP_URL_QUERY);
+                            $song['url']= substr($parsedUrl, 2, 11);
+                            $songManager->insertSong($song, $playlistId);
+                        }
+                        header('Location: /song/showone/' . $_SESSION['username'] . '/?added=ok');
+                    }
+                }
+            } else {
+                $errors= $validator->getErrors();
             }
         }
-
         return $this->twig->render('Song/add.html.twig', [
             'questions' => $questions,
             'errors' => $errors,

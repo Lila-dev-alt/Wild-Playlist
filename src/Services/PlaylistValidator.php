@@ -3,6 +3,8 @@
 
 namespace App\Services;
 
+use App\Model\PlaylistManager;
+
 class PlaylistValidator
 {
     /**
@@ -10,8 +12,11 @@ class PlaylistValidator
      */
     private $errors = [];
 
-
-    public function validatePlaylistName($playlistName)
+    /**
+     * @param string $playlistName
+     * @return mixed
+     */
+    public function validatePlaylistName(string $playlistName)
     {
         $val = trim($playlistName);
         if (empty($val)) {
@@ -27,8 +32,11 @@ class PlaylistValidator
         return $this->errors;
     }
 
-
-    public function cleanInput(string $string)
+    /**
+     * @param string $string
+     * @return string
+     */
+    public function cleanInput(string $string): string
     {
         return trim(filter_var($string, FILTER_SANITIZE_STRING));
     }
@@ -41,23 +49,27 @@ class PlaylistValidator
     /**
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
     public function cleanUrl(string $songUrl):string
     {
-        $val = trim($songUrl);
+        $val       = trim($songUrl);
         $parsedUrl = parse_url($val, PHP_URL_QUERY);
-        $id = substr($parsedUrl, 2, 11);
+        $id        = substr($parsedUrl, 2, 11);
         return $id;
     }
 
-    public function validateUrlSong($song)
+    /**
+     * @param string $song
+     * @return mixed
+     */
+    public function validateUrlSong(string $song)
     {
-        $val = trim($song);
+        $val       = trim($song);
         $parsedUrl = parse_url($val, PHP_URL_QUERY);
-        $id = substr($parsedUrl, 2, 11);
+        $id        = substr($parsedUrl, 2, 11);
 
         //not empty
         if (empty($val)) {
@@ -69,6 +81,21 @@ class PlaylistValidator
              \'https://www.youtube.com/watch?v=2Vv-BfVoq4g\'');
         }
 
+        return $this->errors;
+    }
+
+    /**
+     * @param int $userId
+     * @return mixed
+     */
+    public function checkIfUserHasPlaylist(int $userId)
+    {
+        $playlist     = new PlaylistManager();
+        $userPlaylist = $playlist->selectOneByUserId($userId);
+        if (!empty($userPlaylist)) {
+            $this->addErrors('playlist', 'Vous avez déjà créé une playlist avec ce compte.
+            Si vous voulez en créer une nouvelle, créez un aute compte.');
+        }
         return $this->errors;
     }
 }

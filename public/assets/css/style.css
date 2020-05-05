@@ -59,5 +59,15 @@ a, .list-dec{
     text-align: center;
 }
 
+/*Add Playlist*/
+.btn-outline-success{
+    transition: transform .2s;
+}
+.btn-outline-success:hover{
+    transform: scale(1.2) rotate(-10deg) ;
+}
+.small{
+    width:40%;
+}
 
 

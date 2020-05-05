@@ -17,7 +17,7 @@
                         {{ playlist.user_name |capitalize }} <span>et sa playlist</span></a></h5>
                 <p class="mt-5">Sa {{ playlist.qContent }}</p>
             </div>
-            <iframe width="560" height="315"   src="{{ playlist.url }}"   allow="accelerometer; autoplay;
+            <iframe width="560" height="315"   src="https://www.youtube.com/embed/{{ playlist.url }}"   allow="accelerometer; autoplay;
             encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     {% endfor %}

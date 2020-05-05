@@ -18,6 +18,10 @@ class SongManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    /**
+     * @param string $name
+     * @return array
+     */
     public function showByName(string $name)
     {
         $statement = $this->pdo->prepare("SELECT song.id, song.name AS songName, song.url, 
@@ -32,6 +36,11 @@ class SongManager extends AbstractManager
         return $statement->fetchAll();
     }
 
+    /**
+     * @param array $playlist
+     * @param int $playlistId
+     * @return int
+     */
     public function insertSong(array $playlist, int $playlistId)
     {
         $query  = 'INSERT INTO '  . self::TABLE . ' (url, playlist_id, question_id) ';
