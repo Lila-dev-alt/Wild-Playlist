@@ -1,6 +1,11 @@
 {% extends 'layout.html.twig'  %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="/assets/css/_addQuestionForm.css">
+{% endblock %}
 {% block content %}
-    <div class="row justify-content-md-center">
+   {#<div class="row justify-content-md-center">
     <form action="/question/add" method="post">
         <div class="">
             <label for="addQuestion">Quel est votre : </label>
@@ -10,5 +15,21 @@
             <button type="submit">Suggérer ma question !</button>
         </div>
     </form>
+    </div> #}
+
+    <div class="login">
+        <div class="account-login">
+            <h1>Ajout de question</h1>
+            <form action="/question/add" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="addQuestion">Quel est votre : </label>
+                    <input type="text" id="addQuestion" name="content" placeholder="Chanson pour ... " class="form-control">
+                </div>
+                <button class="btn" type="submit">Ajouter !</button>
+            </form>
+        </div>
     </div>
+    {% if error is defined %}
+        <div class="alert alert-warning">{{ error.erreur }} </div>
+    {% endif %}
 {% endblock %}
