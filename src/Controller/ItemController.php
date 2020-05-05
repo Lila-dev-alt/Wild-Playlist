@@ -50,13 +50,11 @@ class ItemController extends AbstractController
         $itemManager = new ItemManager();
         $item = $itemManager->selectOneById($id);
 
-        return $this->twig->render('Item/list.html.twig', ['item' => $item]);
+        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
     }
 
 
     /**
-     * Display item edition page specified by $id
-     *
      * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError
