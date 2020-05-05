@@ -35,8 +35,6 @@ class QuestionController extends AbstractController
         $questionManager = new QuestionManager();
         $questionManager->delete($id);
         header('Location:/question/show');
-
-        exit();
     }
 
     /**
@@ -52,13 +50,9 @@ class QuestionController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $questionManager->update($_POST);
-            // TODO: faut-il rediriger vers show ou laisser sur edit ?
             header('Location:/question/edit/' . $_POST['id']);
         }
 
         return $this->twig->render('Question/edit.html.twig', ['question' => $question]);
     }
-
-
-
 }
