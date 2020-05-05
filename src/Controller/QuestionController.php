@@ -52,7 +52,6 @@ class QuestionController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $questionManager->update($_POST);
-            // TODO: faut-il rediriger vers show ou laisser sur edit ?
             header('Location:/question/edit/' . $_POST['id']);
         }
 
@@ -75,7 +74,7 @@ class QuestionController extends AbstractController
                 exit();
             }
         }
-        return $this->twig->render('question/add.html.twig', [
+        return $this->twig->render('Question/add.html.twig', [
             'error' => $error,
         ]);
     }

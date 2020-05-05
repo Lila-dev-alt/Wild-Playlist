@@ -1,7 +1,11 @@
 <?php
 
-
 namespace App\Model;
+
+
+/**
+ *
+ */
 
 class QuestionManager extends AbstractManager
 {
@@ -54,6 +58,7 @@ class QuestionManager extends AbstractManager
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `content` = :content WHERE id=:id");
         $statement->bindValue(':id', $question['id'], \PDO::PARAM_INT);
         $statement->bindValue(':content', $question['content'], \PDO::PARAM_STR);
+
 
         return $statement->execute();
     }
