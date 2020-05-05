@@ -13,7 +13,10 @@
              <div>
                  <div class="m-5">
                      <label for="urlQ"><i class="fas fa-music"></i>  Quelle est votre {{question.content}} ?  <i class="fas fa-music"></i></label>
-                     <input type="url" name="{{ question.id }}" id="urlQ{{ question.id }}">
+                     <input type="url" name="{{ question.id }}" id="urlQ{{ question.id }}"
+                            value="{% if post is defined %}
+                                        {{ post[question.id]}}
+                                    {% endif %}">
                      <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
                  </div>
              </div>

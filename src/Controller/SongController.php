@@ -90,6 +90,7 @@ class SongController extends AbstractController
         return $this->twig->render('Song/add.html.twig', [
             'questions' => $questions,
             'errors' => $errors,
+            'post'=> $_POST,
         ]);
     }
 }
