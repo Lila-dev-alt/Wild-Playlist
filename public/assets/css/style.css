@@ -26,7 +26,7 @@ a, .list-dec{
     color: #7E338F;
 }
 
-.media:hover, .form-group:hover, .shadow-lg input:hover {
+.media:hover, .form-group:hover, .shadow-lgs input:hover {
     box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
 
