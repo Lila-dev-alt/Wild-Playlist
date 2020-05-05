@@ -8,16 +8,19 @@
 
 {% block content %}
 
+
     <div class=" container-sm shadow-lg mt-5 bg-white pb-2 mb-4 text-sm-center">
+        {% if message.added is defined %}
+            <div class="alert alert-success">{{ message.added }} </div>
+        {% endif %}
         <h2 class="text-center pt-5 mb-5">{{ songs[0].playlistName | capitalize}}</h2>
         <ul class="mb-5 text-center">
             {% for song in songs%}
                 <li class="pb-4 mr-4 song  border border-white rounded d-lg-flex flex-lg-row justify-content-between list-dec iframeCardHover" title="Cliquez pour faire apparaitre le clip">
                     <div class="text-left m-5 text-sm-center">
-                        <h4>{{ song.songName | capitalize }} <small><i class="fas fa-angle-right"></i></small></h4>
-                        <p>{{ song.content }}</p>
+                        <h4>{{ song.content | capitalize}} <small><i class="fas fa-angle-right"></i></small></h4>
                     </div>
-                    <iframe width="560" height="315" src="{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </li>
             {% endfor %}
         </ul>

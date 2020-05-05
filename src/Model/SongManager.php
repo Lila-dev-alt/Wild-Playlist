@@ -18,6 +18,10 @@ class SongManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    /**
+     * @param string $name
+     * @return array
+     */
     public function showByName(string $name)
     {
         $statement = $this->pdo->prepare("SELECT song.id, song.name AS songName, song.url, 
@@ -30,5 +34,23 @@ class SongManager extends AbstractManager
         $statement->bindValue(':name', $name, \PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll();
+    }
+
+    /**
+     * @param array $playlist
+     * @param int $playlistId
+     * @return int
+     */
+    public function insertSong(array $playlist, int $playlistId)
+    {
+        $query  = 'INSERT INTO '  . self::TABLE . ' (url, playlist_id, question_id) ';
+        $query .= 'VALUES (:url, :playlist_id, :question_id);';
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':url', $playlist['url'], \PDO::PARAM_STR);
+        $statement->bindValue(':playlist_id', $playlistId, \PDO::PARAM_INT);
+        $statement->bindValue(':question_id', $playlist['question_id'], \PDO::PARAM_INT);
+        if ($statement->execute()) {
+            return (int)$this->pdo->lastInsertId();
+        }
     }
 }

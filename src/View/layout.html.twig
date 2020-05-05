@@ -31,6 +31,7 @@
             {% if session.username is defined %}
                 {% if session.admin != '1' %}
                     <div class="d-flex nav-item navbar-nav">
+                        <a class=" mr-3 nav-link green-hover text-sm-right" href="/song/add"><span> <i class="fas fa-guitar"></i></span> Ajouter ma playlist </a>
                         <a class=" mr-3 nav-link green-hover text-sm-right" href="#"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant que {{ session.username | capitalize }}</a>
                         <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
                     </div>
