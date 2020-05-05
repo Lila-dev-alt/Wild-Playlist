@@ -35,6 +35,8 @@ class QuestionController extends AbstractController
         $questionManager = new QuestionManager();
         $questionManager->delete($id);
         header('Location:/question/show');
+
+        exit();
     }
 
     /**
