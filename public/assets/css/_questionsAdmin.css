@@ -1,8 +1,10 @@
 /* css admin delete/edit questions */
 
-body {
+.allpage {
     color: #566787;
     background: linear-gradient(to bottom, #0099ff 0%, #fff 100%);
+    padding-top: 10vh;
+    padding-bottom: 20vh;
 }
 .table-wrapper {
     background: #fff;
@@ -100,15 +102,18 @@ li {
 /* css admin edit questions */
 
 
-.alfred {
+.topbottom {
     text-align : center;
-    margin-bottom: 200px;
-    margin-top: 200px;
+    padding-bottom: 10vh;
+    padding-top: 10vh;
 }
 .edit-input {
-    width: 300px
+    width: 50vh
+    max-width: 100%;
 }
 
 .input-width {
-    width: 600px;
+    width: 70vh;
+    box-sizing: border-box;
+    max-width: 100%;
 }
