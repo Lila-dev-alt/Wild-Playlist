@@ -22,11 +22,13 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link pink-hover text-right" href="/home/index">Home </a>
+                    <a class="nav-link pink-hover text-right" href="/home/index">Wild Playlist </a>
                 </li>
+                {% if session.username is defined %}
                 <li class="nav-item">
                     <a class="nav-link blue-hover text-right"  href="/playlist/list/name">Trouver une playlist</a>
                 </li>
+                {% endif %}
             </ul>
             {% if session.username is defined %}
                 {% if session.admin != '1' %}
@@ -37,7 +39,8 @@
                     </div>
                 {% else %}
                     <div class="d-flex nav-item navbar-nav">
-                        <a class=" mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant qu'admin {{ session.username | capitalize }} </a>
+                        <a class="mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant qu'admin {{ session.username | capitalize }} </a>
+                        <a class="mr-3 nav-link green-hover text-sm-right" href="/question/show">Gestion des questions</a>
                         <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
                     </div>
                 {% endif %}
