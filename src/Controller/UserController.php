@@ -84,6 +84,7 @@ class UserController extends AbstractController
                     exit;
                 }elseif(password_verify($_POST['passwordConnec'], $userData['password']) && $userData['is_admin']==='1') {
                     $_SESSION['username'] = $userData['name'];
+                    $_SESSION['id'] = $userData['id'];
                     $_SESSION['admin'] = $userData['is_admin'];
                     header('Location:/home/index'); //redirect admin
                     exit;
