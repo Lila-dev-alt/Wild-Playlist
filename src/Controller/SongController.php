@@ -24,7 +24,7 @@ class SongController extends AbstractController
     public function showOne($userName)
     {
         if (empty($_SESSION)) {
-            header('Location: /home/index/?connec=0');
+            header('Location: /home/index/?connected=0');
         }
 
         $message=[];

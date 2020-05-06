@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    {% if connecMissing.connec is defined %}
-        <div class="alert alert-danger mt-3 container text-center">{{ connecMissing.connec }}</div>
+    {% if notConnected.notConnected is defined %}
+        <div class="alert alert-danger mt-3 container text-center">{{ notConnected.notConnected }}</div>
     {% endif %}
     <div class="container">
         <h2 class="text-center m-5">Les dernières playlists créées</h2>

@@ -26,8 +26,8 @@ class HomeController extends AbstractController
     public function index() : string
     {
         $message=[];
-        if (isset($_GET['connec'])) {
-            $message['connec']='Merci de vous inscrire ou de vous connecter !';
+        if (isset($_GET['connected'])) {
+            $message['notConnected']='Merci de vous inscrire ou de vous connecter pour voir le détail des playlists !';
         }
         $homeManager = new HomeManager();
         $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(
@@ -36,7 +36,7 @@ class HomeController extends AbstractController
         );
         return $this->twig->render('Home/index.html.twig', [
             'playlists'=>$playlists,
-            'connecMissing'=>$message,
+            'notConnected'=>$message,
         ]);
     }
 }
