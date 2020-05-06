@@ -4,7 +4,7 @@
     <form action="" method="post" class="container shadow-lg  rounded text-center bg-white pt-3 mb-5 mt-5">
         <div class="d-flex flex-column align-items-center">
             <label for="name">Titre de la Playlist : </label>
-            <input type="text" name="name" class="small">
+            <input type="text" name="name" class="small" min="2" max="255">
         </div>
         {% if errors.playlist is defined %}
             <div class="alert alert-danger">{{ errors.playlist }} </div>
@@ -18,10 +18,8 @@
                  <div class=" d-flex flex-column">
                      <label for="urlQ"><i class="fas fa-music mr-3"></i>  Quelle est votre {{question.content}} ?  <i class="fas fa-music ml-3"></i></label>
                      <input type="url" name="{{ question.id }}" id="urlQ{{ question.id }}"
-                            value="{% if post is defined %}
-                                        {{ post[question.id]}}
-                                    {% endif %}" class="mt-3">
-                     <input type="hidden" id="qId" value="{{ question.id }}" name="qId{{  question.id }}" >
+                            value="{{  (post is defined) ?  post[question.id] }}" class="mt-3" >
+                     <input type="hidden" id="qId-{{question.id}}" value="{{ question.id }}" name="qId{{  question.id }}" >
                  </div>
              </div>
              {% if errors.url.urlSong is defined %}

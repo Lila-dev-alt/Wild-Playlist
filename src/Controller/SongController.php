@@ -12,6 +12,10 @@ use http\Env\Request;
 
 class SongController extends AbstractController
 {
+
+    const BEGINNING_YOUTUBE_ID_AFTER_PARSED_URL = 2;
+    const YOUTUBE_ID_LENGTH = 11;
+
     /**
      * Display item listing
      *
@@ -25,6 +29,7 @@ class SongController extends AbstractController
     {
         if (empty($_SESSION)) {
             header('Location: /home/index/?connected=0');
+            exit;
         }
 
         $message=[];
@@ -103,10 +108,15 @@ class SongController extends AbstractController
                       
                         foreach ($songs as $song) {
                             $parsedUrl= parse_url($song['url'], PHP_URL_QUERY);
-                            $song['url']= substr($parsedUrl, 2, 11);
+                            $song['url']= substr(
+                                $parsedUrl,
+                                self::BEGINNING_YOUTUBE_ID_AFTER_PARSED_URL,
+                                self::YOUTUBE_ID_LENGTH
+                            );
                             $songManager->insertSong($song, $playlistId);
                         }
                         header('Location: /song/showone/' . $_SESSION['username'] . '/?added=ok');
+                        exit;
                     }
                 }
             } else {
