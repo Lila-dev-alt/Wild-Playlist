@@ -60,10 +60,10 @@ a, .list-dec{
 }
 
 /*Add Playlist*/
-.btn-outline-success{
+.moving-btn{
     transition: transform .2s;
 }
-.btn-outline-success:hover{
+.moving-btn:hover{
     transform: scale(1.2) rotate(-10deg) ;
 }
 .small{
