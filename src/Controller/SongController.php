@@ -3,7 +3,6 @@
 
 namespace App\Controller;
 
-
 use App\Model\PlaylistManager;
 use App\Model\CommentManager;
 use App\Model\SongManager;
@@ -24,6 +23,9 @@ class SongController extends AbstractController
 
     public function showOne($userName)
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+        }
 
         $message=[];
         $errorComments = [
