@@ -70,7 +70,7 @@ class QuestionController extends AbstractController
                     'content' => $_POST['content'],
                 ];
                 $questionManager->insert($question);
-                header('Location:/question/add/');
+                header('Location:/question/all');
                 exit();
             }
         }
