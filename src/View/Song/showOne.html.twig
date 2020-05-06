@@ -34,12 +34,11 @@
                         <li>
                             <div class="commenterImage">
 
-                                <p class="user-class"> {{ comments[0].name | capitalize }}</p>
-                                <img src="https://eu.ui-avatars.com/api/?name={{ comments[0].name }}"/>
+                                <p class="user-class"> {{ comment.name | capitalize }}</p>
+                                <img src="https://eu.ui-avatars.com/api/?name={{ comment.name }}"/>
                             </div>
                             <div class="commentText">
                                 <p >{{ comment.content }}</p>
-
                             </div>
                         </li>
                     {% endfor %}
@@ -47,7 +46,7 @@
 
                 <form id="comment-form" action="/comment/add" class="form-inline" role="form" method="post">
                     <div class="form-c-group">
-                        <input class="form-control" type="text" id="comment" name="comment"
+                        <input class="form-control" type="text" id="comment" name="comment" required maxlength="255"
                                placeholder="Votre commentaire"/>
                         <input class="form-control" type="hidden" name="user" value="{{ session.id }}"/>
                         <input class="form-control" type="hidden" name="playlist" value="{{ songs[0].playlistId }}"/>
