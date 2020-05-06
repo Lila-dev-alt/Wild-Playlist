@@ -19,10 +19,18 @@ class QuestionController extends AbstractController
      */
     public function show()
     {
+        $success = [];
+        if(isset($_GET['success']))
+        {
+            $success['success'] = 'Ajoutée avec succès';
+        };
         $questionManager = new QuestionManager();
         $questions = $questionManager->selectAll();
 
-        return $this->twig->render('Question/all.html.twig', ['questions' => $questions]);
+        return $this->twig->render('Question/all.html.twig', [
+            'questions' => $questions,
+            'success' => $success,
+        ]);
     }
 
     /**
@@ -70,7 +78,7 @@ class QuestionController extends AbstractController
                     'content' => $_POST['content'],
                 ];
                 $questionManager->insert($question);
-                header('Location:/question/all');
+                header('Location:/question/show/?success=ok');
                 exit();
             }
         }

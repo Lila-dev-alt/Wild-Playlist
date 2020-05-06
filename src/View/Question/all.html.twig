@@ -8,6 +8,11 @@
 {% endblock %}
 {% block content %}
 <div class="allpage">
+    {% if success.success is defined %}
+        <div class="alert alert-success mt-3 container text-center">
+            {{ success.success }}
+        </div>
+    {% endif %}
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
