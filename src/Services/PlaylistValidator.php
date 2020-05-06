@@ -25,7 +25,7 @@ class PlaylistValidator
             if (!preg_match('/^[a-zA-Z0-9_ ]{2,255}$/', $val)) {
                 $this->addErrors(
                     'playlistName',
-                    'Le pseudo doit avoir entre 2 et 255 caractères avec des chiffres et lettres seulement'
+                    'Le titre doit avoir entre 2 et 255 caractères avec des chiffres et lettres seulement'
                 );
             }
         }
