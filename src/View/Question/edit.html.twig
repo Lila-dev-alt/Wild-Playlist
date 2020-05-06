@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/_questionsAdmin.css">{% endblock %}
+{% block content %}
+
+
+<div class="allpage">
+    <div  class=" container topbottom d-flex flex-column align-items-sm-center justify-content-center">
+        <h2 class="text-white ">Editer la question : {{ question.content }}</h2>
+        <br>
+    {% include 'Question/_form.html.twig' %}
+        <br>
+        <input type="button" class="w3-btn w3-black edit-input" onclick="location.href='/question/show/{{ question.id }}'" value="Revenir aux questions">
+    </div>
+</div>
+{% endblock %}

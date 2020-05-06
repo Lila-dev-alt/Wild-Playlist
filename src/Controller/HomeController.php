@@ -20,12 +20,23 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+    const PLAYLIST_NB_HOMEPAGE = 3 ;
+    const MAINWORD_HOMEPAGE_SELECTED_PLAYLISTS= 'tous les temps';
+
     public function index() : string
     {
+        $message=[];
+        if (isset($_GET['connected'])) {
+            $message['notConnected']='Merci de vous inscrire ou de vous connecter pour voir le détail des playlists !';
+        }
         $homeManager = new HomeManager();
-        $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(1, 3);
+        $playlists=$homeManager->selectPlaylistsWithQuestionAndLimit(
+            self::MAINWORD_HOMEPAGE_SELECTED_PLAYLISTS,
+            self::PLAYLIST_NB_HOMEPAGE
+        );
         return $this->twig->render('Home/index.html.twig', [
             'playlists'=>$playlists,
+            'notConnected'=>$message,
         ]);
     }
 }

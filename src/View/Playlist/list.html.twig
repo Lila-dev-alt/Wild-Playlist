@@ -12,8 +12,8 @@
                     <tbody>
                         {% for playlist in playlists %}
                             <tr>
-                                <th scope="row" class="list-dec text-left"><a href="/playlist/show/{{ playlist.id }}" class="text-dark">{{ playlist.name | capitalize}} </a></th>
-                                <th scope="row" class="list-dec"><a href="/playlist/show/{{ playlist.id }}" class="text-dark"><i class="fas fa-headphones"></i></a></th>
+                                <th scope="row" class="list-dec text-left"><a href="/song/showone/{{ playlist.user_name }}" class="text-dark">{{ playlist.name | capitalize}} </a></th>
+                                <th scope="row" class="list-dec"><a href="/song/showone/{{ playlist.user_name }}" class="text-dark"><i class="fas fa-headphones"></i></a></th>
                             </tr>
                         {% endfor %}
                     </tbody>

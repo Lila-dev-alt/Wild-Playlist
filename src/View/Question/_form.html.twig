@@ -1,0 +1,7 @@
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/_questionsAdmin.css">{% endblock %}
+
+<form method="post">
+    <input type="hidden" value="{{ question.id }}" name="id">
+    <input class="input-width" type="text" value="{{ question.content }}" name="content">
+    <input type="submit" value="Valider">
+</form>

@@ -14,16 +14,16 @@ class UserValidator
     private static $fields = ['pseudo', 'email', 'password'];
 
 
-    public function __construct($post_data)
+    public function __construct($postData)
     {
-        $this->data = $post_data;
+        $this->data = $postData;
     }
 
     public function validateForm()
     {
         foreach (self::$fields as $field) {
             if (!array_key_exists($field, $this->data)) {
-                trigger_error("$field is not present in data");
+                trigger_error($field . ' is not present in data');
                 return;
             }
         }
@@ -31,6 +31,7 @@ class UserValidator
         $this->validateEmail();
         $this->validatePassword();
         $this->checkIfEmailUsed();
+        $this->checkIfUsernameIsUsed();
         return $this->errors;
     }
 
@@ -43,7 +44,7 @@ class UserValidator
             if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $val)) {
                 $this->addErrors(
                     'pseudo',
-                    'Le pseudo doit être entre 6 et 12 charactères avec des chiffres et lettres seulement'
+                    'Le pseudo doit être entre 6 et 12 caractères avec des chiffres et lettres seulement'
                 );
             }
         }
@@ -70,7 +71,8 @@ class UserValidator
             if (!preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $val)) {
                 $this->addErrors(
                     'password',
-                    'Le mot de passe doit contenir au moins 8 charactère, une lettre minuscule, une majuscule, et un nombre'
+                    'Le mot de passe doit contenir au moins 8 caractères, une lettre minuscule, une majuscule, 
+                    et un nombre'
                 );
             }
         }
@@ -91,10 +93,22 @@ class UserValidator
     {
         $userManager = new UserManager();
         $userExist = $userManager->selectOneByEmail($this->data['email']);
-        if (count($userExist) > 0) {
+        if ($userExist) {
             $this->addErrors('emaile', 'Attention l\'email est déjà utilisé');
         }
     }
+
+
+    private function checkIfUsernameIsUsed()
+    {
+        $userManager = new UserManager();
+        $usernameExist = $userManager->selectOneByUsername($this->data['pseudo']);
+        if ($usernameExist) {
+            $this->addErrors('pseudos', 'Attention ce pseudo est déjà utilisé !');
+        }
+    }
+
+
     public function noError()
     {
         $noError = "";
@@ -102,11 +116,5 @@ class UserValidator
             $noError = "Merci de vous être inscrit. Veuillez-vous connecter";
         }
         return $noError;
-    }
-
-
-    public function clean($var)
-    {
-        return ucfirst($var);
     }
 }

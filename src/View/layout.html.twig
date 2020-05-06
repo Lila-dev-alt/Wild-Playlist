@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
-    {% block stylesheet %}{% endblock %}
+    {% block stylesheet %} {% endblock %}
 </head>
 <body>
 {% block navbar %}
-   <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
         <a class="navbar-brand" href="/home/index"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,48 +22,66 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link pink-hover text-sm-right" href="/home/index">Home </a>
+                    <a class="nav-link pink-hover text-right" href="/home/index">Wild Playlist </a>
                 </li>
+                {% if session.username is defined %}
                 <li class="nav-item">
-                    <a class="nav-link blue-hover text-sm-right"  href="/playlist/list/name">Trouver une playlist</a>
+                    <a class="nav-link blue-hover text-right"  href="/playlist/list/name">Trouver une playlist</a>
                 </li>
+                {% endif %}
             </ul>
-            <div class="d-flex nav-item navbar-nav">
-                <a class=" mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Inscription</a>
-                <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/add"><span><i class="fas fa-sign-in-alt"></i></span> Connexion</a>
-            </div>
+            {% if session.username is defined %}
+                {% if session.admin != '1' %}
+                    <div class="d-flex nav-item navbar-nav">
+                        <a class=" mr-3 nav-link green-hover text-sm-right" href="/song/add"><span> <i class="fas fa-guitar"></i></span> Ajouter ma playlist </a>
+                        <a class=" mr-3 nav-link green-hover text-sm-right" href="#"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant que {{ session.username | capitalize }}</a>
+                        <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
+                    </div>
+                {% else %}
+                    <div class="d-flex nav-item navbar-nav">
+                        <a class="mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant qu'admin {{ session.username | capitalize }} </a>
+                        <a class="mr-3 nav-link green-hover text-sm-right" href="/question/show">Gestion des questions</a>
+                        <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="d-flex nav-item navbar-nav">
+                    <a class=" mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Inscription</a>
+                    <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/login"><span><i class="fas fa-sign-in-alt"></i></span> Connexion</a>
+                </div>
+            {% endif %}
         </div>
     </nav>
 {% endblock %}
 {% block content %}{% endblock %}
 {% block footer %}
-    <footer class="footer border-top border-success">
-        <div class="container-fluid d-flex justify-content-between">
-            <div class="mt-4">
-                <p>Made Wildly with Love by :</p>
-                <div class=" ">
-                    <div class="d-flex justify-content-around ">
-                        <a class="text-dark" href="" target="_blank">Amélie</a>
-                        <a class="text-dark" href="" target="_blank">Elisa</a>
+    <footer class=" container-fluid footer border-top border-success">
+        <div class=" d-flex justify-content-between align-items-center">
+            <div class="mt-4 ">
+                <p class="text-wrap ">Made Wildly with Love by :</p>
+                <div>
+                    <div>
+                        <a class="text-dark ml-lg-4 " href="" target="_blank">Amélie</a>
+                        <a class="text-dark ml-lg-4" href="" target="_blank">Elisa</a>
                     </div>
-                    <div class="d-flex justify-content-around mt-3">
-                        <a class="text-dark" href="" target="_blank">Fred</a>
-                        <a class="text-dark" href="" target="_blank">Ludovic</a>
+                    <div class="mt-3">
+                        <a class="text-dark ml-lg-4" href="" target="_blank">Fred</a>
+                        <a class="text-dark ml-lg-4" href="" target="_blank">Ludovic</a>
                     </div>
                 </div>
             </div>
-            <div class=" mt-5">
-                <a href="https://www.facebook.com/WildCodeSchool/" class="fb-ic">
-                    <i class="fab fa-facebook-f fa-lg text-blue mr-md-5 mr-3 fa-2x"> </i>
+            <div>
+                <a href="https://www.facebook.com/WildCodeSchool/" >
+                    <i class="fab fa-facebook-f fa-2x text-dark ml-1 ml-md-5"> </i>
                 </a>
-                <a href="https://twitter.com/WildSchool_Bdx" class="fb-ic">
-                    <i class="fab fa-twitter fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
+                <a href="https://twitter.com/WildSchool_Bdx" class="ml-sm-3">
+                    <i class="fab fa-twitter fa-2x text-dark  ml-1 ml-md-5"></i>
                 </a>
-                <a href="https://www.linkedin.com/school/wild-codes-chool/">
-                    <i class="fab fa-linkedin-in fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
+                <a href="https://www.linkedin.com/school/wild-codes-chool/" class="ml-sm-3">
+                    <i class="fab fa-linkedin-in fa-2x text-dark ml-1 ml-md-5"></i>
                 </a>
-                <a href="https://www.instagram.com/wildcodeschoolofficial/?hl=fr">
-                    <i class="fab fa-instagram fa-lg text-blue mr-md-5 mr-3 fa-2x"></i>
+                <a href="https://www.instagram.com/wildcodeschoolofficial/?hl=fr" class="ml-sm-3">
+                    <i class="fab fa-instagram fa-2x text-dark ml-1 ml-md-5 mr-2"></i>
                 </a>
             </div>
         </div>
@@ -75,11 +93,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script>$(window).scroll(function() {
-        var scroll = $(window).scrollTop();
-        $(".diagonal-bg svg line").attr("stroke-width",  ((30 + scroll/10)  + "%"));});
-</script>
+<script src="/assets/js/scroll.js"></script>
 </body>
 </html>
-
-

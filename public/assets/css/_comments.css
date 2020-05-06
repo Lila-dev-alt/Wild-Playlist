@@ -1,0 +1,56 @@
+.detailBox {
+    width:400px;
+    border:1px solid #bbb;
+    margin:50px;
+}
+.actionBox {
+    width: 100%;
+}
+
+.commentBox .form-c-group:first-child, .actionBox .form-c-group:first-child {
+    width:59%;
+}
+
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:40px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:100%;
+}
+.commentText p {
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+}
+
+.user-class {
+    font-weight: bold;
+}
+.form-control {
+    display: inline-block;
+    vertical-align: middle;
+}
+#add {
+    margin-left: 8px;
+}
