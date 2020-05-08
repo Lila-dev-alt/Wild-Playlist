@@ -1,0 +1,11 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    background: linear-gradient(#1b78f2 0%, #fff 100%);
+
+    width: 100%;
+
+}
