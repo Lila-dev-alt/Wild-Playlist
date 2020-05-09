@@ -32,9 +32,19 @@ class LikesManager extends AbstractManager
     public function countLikes(int $playlistId)
     {
         $statement = $this->pdo->prepare("SELECT count(playlist_id) AS nb_likes FROM " . $this->table . " WHERE playlist_id=:id");
-        $statement->bindValue('id', $playlistId, \PDO::PARAM_INT);
+        $statement->bindValue(':id', $playlistId, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch();
+    }
+
+    public function selectWithUserIdAndPlaylistId(int $user, int $playlist)
+    {
+        $query= "SELECT * FROM " . $this->table . " WHERE user_id =':userId' AND playlist_id= ':playlist'";
+        $statement = $this ->pdo->query($query);
+        $statement->bindValue(':userId', $user, \PDO::PARAM_INT);
+        $statement->bindValue(':playlist', $playlist, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 
 }
