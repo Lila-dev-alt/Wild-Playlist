@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Model\LikesManager;
 use App\Model\PlaylistManager;
 use App\Model\CommentManager;
 use App\Model\SongManager;
@@ -38,11 +39,12 @@ class SongController extends AbstractController
         $songManager= new SongManager();
         $commentManager = new CommentManager();
         $songs= $songManager->showByName($userName);
-
         if (isset($_GET['added'])) {
             $message['added']='Playlist ajoutée avec succès';
         }
-        
+
+        $likesManager= new LikesManager();
+        $likes = $likesManager->countLikes($songs[0]['playlistId']);
         $comments = $commentManager->selectComments($songs[0]['playlistId']);
         if ($_GET) {
             if (array_key_exists("tooLong", $_GET)) {
@@ -53,7 +55,8 @@ class SongController extends AbstractController
             'comments' => $comments,
             'message'=>$message,
             'username' => $userName,
-            'errorComments'=>$errorComments
+            'errorComments'=>$errorComments,
+            'likes'=> $likes,
         ]);
     }
 

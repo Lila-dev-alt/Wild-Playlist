@@ -9,11 +9,23 @@
     cursor: pointer;
 }
 
-
 @media screen and (max-width: 992px) {
     .song iframe {
         width: 250px;
         height: 150px;
         border-top-color: white;
     }
+}
+.fa-heart{
+    color:#F26DC4;
+}
+.fa-heart:hover{
+    cursor:pointer;
+    color: #038C5A;
+}
+.vote{
+    width:40vw;
+}
+.likeSize{
+    font-size: 1.5rem;
 }

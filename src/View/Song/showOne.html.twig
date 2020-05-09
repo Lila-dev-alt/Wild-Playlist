@@ -7,21 +7,22 @@
 {% endblock %}
 
 {% block content %}
-        <div class=" container-sm shadow-lg mt-5 bg-white pb-2 mb-4 text-sm-center">
-        {% if message.added is defined %}
-            <div class="alert alert-success">{{ message.added }} </div>
-        {% endif %}
-        <h2 class="text-center pt-5 mb-5">{{ songs[0].playlistName | capitalize}} ajoutée par {{ songs[0].name | capitalize}} </h2>
-        <ul class="mb-5 text-center">
-            {% for song in songs%}
-                <li class="pb-4 mr-4 song  border border-white rounded d-lg-flex flex-lg-row justify-content-between list-dec iframeCardHover" title="Cliquez pour faire apparaitre le clip">
-                    <div class="text-left m-5 text-sm-center">
-                        <h4>{{ song.content | capitalize}} <small><i class="fas fa-angle-right"></i></small></h4>
-                    </div>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </li>
-            {% endfor %}
-        </ul>
+<div class=" container-sm shadow-lg mt-5 bg-white pb-2 mb-4 text-sm-center">
+    {% if message.added is defined %}
+        <div class="alert alert-success">{{ message.added }} </div>
+    {% endif %}
+    <h2 class="text-center pt-5 mb-5">{{ songs[0].playlistName | capitalize}} ajoutée par {{ songs[0].name | capitalize}} </h2>
+    <ul class="mb-5 text-center">
+        {% for song in songs%}
+            <li class="pb-4 mr-4 song  border border-white rounded d-lg-flex flex-lg-row justify-content-between list-dec iframeCardHover" title="Cliquez pour faire apparaitre le clip">
+                <div class="text-left m-5 text-sm-center">
+                    <h4>{{ song.content | capitalize}} <small><i class="fas fa-angle-right"></i></small></h4>
+                </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ song.url }}" class="hidden mt-lg-3 mr-lg-3 ml-lg-3" <!--allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"--> allowfullscreen></iframe>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="showOne_bottom d-flex justify-content-around align-items-center">
         <div class="detailBox d-flex align-items-center">
             <div class="actionBox">
                 <div>
@@ -33,7 +34,6 @@
                     {% for comment in comments %}
                         <li>
                             <div class="commenterImage">
-
                                 <p class="user-class"> {{ comment.name | capitalize }}</p>
                                 <img src="https://eu.ui-avatars.com/api/?name={{ comment.name }}"/>
                             </div>
@@ -43,7 +43,6 @@
                         </li>
                     {% endfor %}
                 </ul>
-
                 <form id="comment-form" action="/comment/add" class="form-inline" role="form" method="post">
                     <div class="form-c-group">
                         <input class="form-control" type="text" id="comment" name="comment" required maxlength="255"
@@ -55,27 +54,32 @@
                     <div>
                         <button id="add" class="btn btn-default">Ajouter</button>
                     </div>
-
                 </form>
-
             </div>
         </div>
+        <div class="vote text-center likeSize">
+            <div >{{ likes.nb_likes }} personnes aiment cette playlist</div>
+            <i class="fas fa-heart fa-3x mt-4" data-playlistid="{{ songs[0].playlistId}}" data-userid="{{ session.id }}"></i>
+            <div class=" alert hidden container alert-success mt-3" id="alertMessage">Avis ajouté !</div>
+        </div>
     </div>
+</div>
     <div class="diagonal-bg">
         <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
             <line x1='100%' y1='0' x2='1' y2='100%' stroke='#038c5a' stroke-width='30%'/>
         </svg>
     </div>
-{% endblock %}
-{% block js %}
-    <script type="text/javascript" src="/assets/js/iframeNotHidden.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-{% endblock %}
+    {% endblock %}
+    {% block js %}
+        <script type="text/javascript" src="/assets/js/iframeNotHidden.js"></script>
+        <script type="text/javascript" src="/assets/js/likes.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+                integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    {% endblock %}
