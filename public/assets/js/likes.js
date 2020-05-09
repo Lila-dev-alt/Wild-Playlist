@@ -1,5 +1,6 @@
 const hearts= document.getElementsByClassName('fa-heart');
 const alertMessage = document.getElementById('alertMessage');
+const heart = document.getElementById('heart');
 for (let i=0; i < hearts.length;i++) {
     hearts[i].addEventListener('click',(event)=> {
         fetch('/likes/add',{
@@ -14,6 +15,6 @@ for (let i=0; i < hearts.length;i++) {
             })
         })
             .then(response => response.json())
-            .then( data => alertMessage.classList.remove('hidden'))
+            .then( data => alertMessage.classList.remove('hidden'), heart.classList.add('disabled'))
     })
 }
