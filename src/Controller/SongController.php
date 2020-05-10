@@ -10,7 +10,6 @@ use App\Model\SongManager;
 use App\Model\QuestionManager;
 use App\Services\LikesValidator;
 use App\Services\PlaylistValidator;
-use http\Env\Request;
 
 class SongController extends AbstractController
 {
@@ -43,9 +42,14 @@ class SongController extends AbstractController
         if (isset($_GET['added'])) {
             $message['added']='Playlist ajoutée avec succès';
         }
-
+        //affiche les likes
         $likesManager= new LikesManager();
         $likes = $likesManager->countLikes($songs[0]['playlistId']);
+        //cherche si déja liké
+        $likesValidator= new LikesValidator($songs);
+        $likesValidator->checkIfUserAddedLike($songs[0]['playlistId']);
+        $message= $likesValidator->getErrors();
+
         $comments = $commentManager->selectComments($songs[0]['playlistId']);
         if ($_GET) {
             if (array_key_exists("tooLong", $_GET)) {

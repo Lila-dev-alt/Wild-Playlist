@@ -3,7 +3,6 @@
 
 namespace App\Model;
 
-
 class LikesManager extends AbstractManager
 {
     const TABLE = 'user_playlist';
@@ -37,14 +36,11 @@ class LikesManager extends AbstractManager
         return $statement->fetch();
     }
 
-    public function selectWithUserIdAndPlaylistId(int $user, int $playlist)
+    public function selectWithUserId(int $user)
     {
-        $query= "SELECT * FROM " . $this->table . " WHERE user_id =':userId' AND playlist_id= ':playlist'";
-        $statement = $this ->pdo->query($query);
-        $statement->bindValue(':userId', $user, \PDO::PARAM_INT);
-        $statement->bindValue(':playlist', $playlist, \PDO::PARAM_INT);
+        $statement = $this->pdo->prepare("SELECT * FROM " .  $this->table .  " WHERE user_id=:id");
+        $statement->bindValue(':id', $user, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
     }
-
 }

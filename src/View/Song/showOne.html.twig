@@ -58,9 +58,12 @@
             </div>
         </div>
         <div class="vote text-center likeSize">
+            {% if message.like is defined %}
+                <div class="mb-3">Vous aimez cette playlist </div>
+            {% endif %}
             <div >{{ likes.nb_likes }} personne(s)  <i class="fas fa-heart text-dark ml-3 mr-3"></i>   cette playlist</div>
-            <i class="fas fa-heart fa-3x mt-4" id="heart" data-playlistid="{{ songs[0].playlistId}}" data-userid="{{ session.id }}"></i>
-            <div class=" alert hidden container alert-success mt-3" id="alertMessage">Avis ajouté !</div>
+            <i class=" heart-hover fas fa-heart fa-3x mt-4 logo_img {{ message.like is defined ? 'hidden' }}" id="heart" data-playlistid="{{ songs[0].playlistId}}" data-userid="{{ session.id }}" title="cliquez pour ajouter votre avis"></i>
+            <div class=" alert hidden container alert-success mt-3" id="alertMessage">Merci pour votre<i class="fas fa-heart text-dark ml-3 mr-3"></i>  !</div>
         </div>
     </div>
 </div>

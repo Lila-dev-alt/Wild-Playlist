@@ -3,7 +3,6 @@
 
 namespace App\Services;
 
-
 use App\Model\LikesManager;
 
 class LikesValidator
@@ -30,13 +29,14 @@ class LikesValidator
     {
         return $this->errors;
     }
-    public function checkIfUserAddedLike()
+    public function checkIfUserAddedLike(int $playlistId)
     {
         $likesManager= new LikesManager();
-        $likes = $likesManager->selectWithUserIdAndPlaylistId($this->data['user'], $this->data['playlist']);
-        if(!empty($likes)){
-            $this->addErrors('like', 'Vous avez déjà ajouté un like à cette playlist');
+        $existingLikes = $likesManager->selectWithUserId($_SESSION['id']);
+        foreach ($existingLikes as $existingLike) {
+            if (in_array($playlistId, $existingLike)) {
+                $this->addErrors('like', 'Vous avez déjà ajouté un like à cette playlist');
+            }
         }
     }
-
 }
