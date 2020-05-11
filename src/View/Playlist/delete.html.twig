@@ -1,0 +1,47 @@
+{% extends'layout.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/_deletePlaylist.css">
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <div>
+            <div class="btn btn-warning shadow-sm rounded mt-3 ml-3"><a href="/playlist/delete/name" class="list-dec text-dark">Trier par Nom de Playlist</a></div>
+            <div class="btn btn-success shadow-sm rounded mt-3 ml-3"><a href="/playlist/delete/date" class="list-dec text-dark">Trier par Date</a></div>
+        </div>
+        {% if message.deleted is defined %}
+            <div class="alert alert-success mt-5 container text-center">{{ message.deleted }} </div>
+        {% endif %}
+        <div class="container text-center">
+            <div class="card border shadow-lg p-3 mb-5 bg-white rounded text-center mt-4" >
+                <div class="card-body">
+                    <form action="" method="post">
+                        <table class="table table-hover">
+                            <thead class="thead-light font-weight-bold">
+                            <tr>
+                                <th scope="col" class="text-left ">Nom </th>
+                                <th scope="col" class="text-left ">Créée par</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for playlist in playlists %}
+                                <tr>
+                                    <th scope="row" class="list-dec text-left">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="playlistId" value="{{playlist.id }}">
+                                            <label class="form-check-label ml-3" for="{{playlist.id}}"><a href="/song/showone/{{ playlist.user_name }}" class="text-reset">{{playlist.name | capitalize}}</a></label>
+                                        </div>
+                                    </th>
+                                    <th scope="row" class="list-dec text-left">
+                                        {{playlist.user_name | capitalize}}
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <button type="submit" name="delete" class="btn btn-danger moving-btn btn-lg">Supprimer ! <i class="fas fa-broom"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

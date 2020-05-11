@@ -103,6 +103,13 @@ class PlaylistValidator
         }
         return $this->errors;
     }
+
+    /**
+     * @param array $errors
+     * @param array $playlist
+     * @param array $songs
+     * @return array
+     */
     public function isPlaylistReadyToInsert(array $errors, array $playlist, array $songs)
     {
 
@@ -113,6 +120,11 @@ class PlaylistValidator
         }
         return $this->errors;
     }
+
+    /**
+     * @param array $playlist
+     * @param array $songs
+     */
     public function insertPlaylistAndSongs(array $playlist, array $songs)
     {
         $songManager = new SongManager();
@@ -129,5 +141,14 @@ class PlaylistValidator
             );
             $songManager->insertSong($song, $playlistId);
         }
+    }
+    public function checkIfPlaylistExists(int $id)
+    {
+        $playlistManager     = new PlaylistManager();
+        $playlist = $playlistManager->selectOneById($id);
+        if (empty($playlist)) {
+            $this->addErrors('playlist', 'Cette playlist n\'existe pas' );
+        }
+        return $this->errors;
     }
 }

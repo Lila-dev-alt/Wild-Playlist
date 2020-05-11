@@ -111,7 +111,4 @@ class UserController extends AbstractController
         header('Location:/home/index/'); //redirection après déconnexion
         exit;
     }
-
-
-
 }
