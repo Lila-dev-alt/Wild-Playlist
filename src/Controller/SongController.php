@@ -3,12 +3,13 @@
 
 namespace App\Controller;
 
+use App\Model\LikesManager;
 use App\Model\PlaylistManager;
 use App\Model\CommentManager;
 use App\Model\SongManager;
 use App\Model\QuestionManager;
+use App\Services\LikesValidator;
 use App\Services\PlaylistValidator;
-use http\Env\Request;
 
 class SongController extends AbstractController
 {
@@ -29,6 +30,7 @@ class SongController extends AbstractController
     {
         if (empty($_SESSION)) {
             header('Location: /home/index/?connected=0');
+            exit;
         }
 
         $message=[];
@@ -38,11 +40,17 @@ class SongController extends AbstractController
         $songManager= new SongManager();
         $commentManager = new CommentManager();
         $songs= $songManager->showByName($userName);
-
         if (isset($_GET['added'])) {
             $message['added']='Playlist ajoutée avec succès';
         }
-        
+        //affiche les likes
+        $likesManager= new LikesManager();
+        $likes = $likesManager->countLikes($songs[0]['playlistId']);
+        //cherche si déja liké
+        $likesValidator= new LikesValidator($songs);
+        $likesValidator->checkIfUserAddedLike($songs[0]['playlistId']);
+        $message= $likesValidator->getErrors();
+
         $comments = $commentManager->selectComments($songs[0]['playlistId']);
         if ($_GET) {
             if (array_key_exists("tooLong", $_GET)) {
@@ -53,7 +61,8 @@ class SongController extends AbstractController
             'comments' => $comments,
             'message'=>$message,
             'username' => $userName,
-            'errorComments'=>$errorComments
+            'errorComments'=>$errorComments,
+            'likes'=> $likes,
         ]);
     }
 
@@ -103,6 +112,7 @@ class SongController extends AbstractController
                         //insert PL (PL name, user_id & Insert ds song (name, url, pl_id, Q_id)
                         $validator->insertPlaylistAndSongs($playlist, $songs);
                         header('Location: /song/showone/' . $_SESSION['username'] . '/?added=1');
+                        exit;
                     }
                 } else {
                     $errors = $validator->getErrors();

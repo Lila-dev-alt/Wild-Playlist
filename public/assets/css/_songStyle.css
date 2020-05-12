@@ -1,6 +1,9 @@
 .hidden{
     display: none;
 }
+.hidden2{
+    display: none !important;
+}
 .display{
     display: block;
 }
@@ -9,11 +12,52 @@
     cursor: pointer;
 }
 
-
 @media screen and (max-width: 992px) {
     .song iframe {
         width: 250px;
         height: 150px;
         border-top-color: white;
+    }
+}
+
+.fa-heart{
+    color:#F26DC4;
+}
+.heart-hover:hover{
+    cursor:pointer;
+    color: #038C5A;
+}
+.vote{
+    width:40vw;
+}
+.likeSize{
+    font-size: 1.5rem;
+}
+
+.logo_img {
+    position: relative;
+    top: 20px;
+    max-width: 10%;
+    margin: 0 auto;
+}
+.logo_img:hover {
+    animation: .7s infinite beatHeart ease-in;
+}
+
+@keyframes beatHeart {
+    0% {
+        transform: scale(1);
+    }
+    22% {
+        transform: scale(1.05);
+    }
+    40% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
     }
 }
