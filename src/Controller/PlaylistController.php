@@ -35,6 +35,16 @@ class PlaylistController extends AbstractController
     {
         $errors = [];
         $message= [];
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
         $playlistManager = new PlaylistManager();
         $playlists =  $playlistManager->selectByName($name);
         if (isset($_GET['deleted'])) {
@@ -53,7 +63,7 @@ class PlaylistController extends AbstractController
                 exit();
             }
         }
-        return $this->twig->render('Playlist/delete.html.twig',[
+        return $this->twig->render('Playlist/delete.html.twig', [
             'playlists'=> $playlists,
             'errors' => $errors,
             'message'  => $message,

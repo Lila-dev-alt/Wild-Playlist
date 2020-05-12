@@ -17,7 +17,7 @@ class CommentController extends AbstractController
                 'playlist' => $_POST['playlist']
             ];
             if (strlen($comment['comment']) > 255) {
-                $errorComments['tooLong'] = 'Votre commentaire est trop long, il doit faire moins de 255 charactères !';
+                $errorComments['tooLong'] = 'Votre commentaire est trop long, il doit faire moins de 255 caractères !';
                 header("location: /song/showOne/" . $_POST['username'] . '/?' . http_build_query($errorComments));
                 exit;
             }
@@ -41,9 +41,12 @@ class CommentController extends AbstractController
 
         if (empty($_SESSION)) {
             header('Location: /home/index/?connected=0');
-        } if (!empty($_SESSION)) {
+            exit();
+        }
+        if (!empty($_SESSION)) {
             if (!($_SESSION['admin']=='1')) {
                 header('Location:/home/index');
+                exit();
             }
         }
 
@@ -63,6 +66,16 @@ class CommentController extends AbstractController
 
     public function delete($id)
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
         $message = [
             'error'=> ''
         ];

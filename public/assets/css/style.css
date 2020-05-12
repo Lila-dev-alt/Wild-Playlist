@@ -21,6 +21,10 @@ a, .list-dec{
     font-weight: bold;
     color: #038C5A;
 }
+.navbar .collapse > .nav-item > .dropdown .green-hover:hover{
+    font-weight: bold;
+    color: #038C5A;
+}
 .navbar .collapse > .nav-item > .purple-hover:hover {
     font-weight: bold;
     color: #7E338F;
