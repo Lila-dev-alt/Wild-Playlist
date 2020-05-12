@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet  %}
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/assets/css/deleteComments.css">
+{% endblock %}
+{% block content  %}
+    <h2> Administration des commentaires</h2>
+    <div class="alert alert-primary alert-dismissible fade show center" role="alert">
+        <strong>Vous </strong> pouvez supprimer un commentaire s'il n'est pas correct.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% if  message.error is defined and message.error is not empty%}
+        <div class="alert alert-success alert-dismissible fade show col-md-offset-4 no-error" role="alert">
+            <strong>{{ message.error }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="container comments ">
+        <form action="/comment/delete/{{ comment.id }}" method="post">
+            <table class="table table-hover shadow" id="commentTable">
+                <thead class="thead-dark ">
+                <tr>
+                    <th  scope="col" class="text-center">Commentaires</th>
+                    <th  scope="col" class="text-center">Utilisateurs </th>
+                    <th scope="col" class="text-center">Suppression</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <th scope="row" class="text-justify text-dark" >{{ comment.content }}</th>
+                        <td class="text-center" >{{comment.commentUser}}</td>
+                        <td>
+                            <div class="center">
+                                <input type="radio" name="checkbox" value="{{comment.id}}">
+                                <label for="{{comment.id}}"></label>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center mt-0">
+                <button type="submit" name="delete" class="btn btn-info moving-btn btn-lg">Supprimer ! <i class="fas fa-broom"></i></button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/assets/js/comments.js"></script>
+
+{% endblock %}

@@ -35,4 +35,18 @@ class CommentManager extends AbstractManager
         $statement->bindValue('playlist_id', $comment['playlist'], \PDO::PARAM_INT);
         return $statement->execute();
     }
+    public function selectCommentwithName()
+    {
+        return $this->pdo->query("SELECT c.id, c.content, u.name AS commentUser, c.user_id FROM " . $this->table . " c
+            JOIN user u ON u.id= c.user_id 
+            ORDER BY c.id DESC
+            ")->fetchAll();
+    }
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 }

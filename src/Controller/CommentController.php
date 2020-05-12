@@ -32,4 +32,61 @@ class CommentController extends AbstractController
             }
         }
     }
+
+    public function show()
+    {
+        $message = [
+            'error'=>''
+        ];
+
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+        } if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+            }
+        }
+
+        if ($_GET) {
+            if (array_key_exists("error", $_GET[0])) {
+                $message["error"] = $_GET[0]['error'];
+            }
+        }
+        $CommentManager = new CommentManager();
+        $comments = $CommentManager->selectCommentwithName();
+        return $this->twig->render('Comments/comments.html.twig', [
+            'comments'=> $comments,
+            'message' =>$message
+
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $message = [
+            'error'=> ''
+        ];
+        $CommentManager = new CommentManager();
+        $comments = $CommentManager->selectCommentwithName();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (empty($_POST['checkbox'])) {
+                $message['error'] = 'Merci de sélectionner un commentaire puis appuyer sur le bouton supprimer';
+                header('Location:/comment/show/?' . http_build_query([$message]));
+                exit;
+            } else {
+                $comments = [
+                'id' => $_POST['checkbox']
+                ];
+
+                $commentManager = new CommentManager();
+                $commentManager->delete($comments['id']);
+                header('Location:/comment/show/');
+                exit;
+            }
+        }
+        return $this->twig->render('Comments/comments.html.twig', [
+            'comments'=>$comments
+
+        ]);
+    }
 }
