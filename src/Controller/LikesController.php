@@ -19,14 +19,7 @@ class LikesController extends AbstractController
         $likesData= [];
         $likesData['user']     = $object->user;
         $likesData['playlist'] = $object->playlist;
-        /**
-        $likesManager= new LikesManager();
-        $existingLikes = $likesManager->selectWithUserId($_SESSION['id']);
-        foreach ($existingLikes as $existingLike){
-            if (in_array($likesData['playlist'],$existingLike)){
-                $errors['like']='vous aimez cette playlist';
-            }
-        }**/
+
         $likesValidator= new LikesValidator($likesData);
         $likesValidator->checkIfUserAddedLike($likesData['playlist']);
         $errors= $likesValidator->getErrors();
@@ -38,8 +31,3 @@ class LikesController extends AbstractController
         return $json;
     }
 }
-/**
- * $likesValidator= new LikesValidator($songs);
-$likesValidator->checkIfUserAddedLike($songs[0]['playlistId']);
-$message= $likesValidator->getErrors();
- */

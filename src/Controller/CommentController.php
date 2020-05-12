@@ -24,7 +24,7 @@ class CommentController extends AbstractController
             if (!empty($comment['id'] && !empty($comment['comment']))) {
                 $commentManager = new CommentManager();
                 $commentManager->insertComments($comment);
-                header("location: /song/showOne/" . $_POST['username']);
+                header("location: /song/showOne/" . $_POST['username'] . "/#comment-form");
                 exit;
             } else {
                 header("location: /song/showOne/" . $_POST['username']);

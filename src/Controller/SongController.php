@@ -30,6 +30,7 @@ class SongController extends AbstractController
     {
         if (empty($_SESSION)) {
             header('Location: /home/index/?connected=0');
+            exit;
         }
 
         $message=[];
@@ -111,6 +112,7 @@ class SongController extends AbstractController
                         //insert PL (PL name, user_id & Insert ds song (name, url, pl_id, Q_id)
                         $validator->insertPlaylistAndSongs($playlist, $songs);
                         header('Location: /song/showone/' . $_SESSION['username'] . '/?added=1');
+                        exit;
                     }
                 } else {
                     $errors = $validator->getErrors();
