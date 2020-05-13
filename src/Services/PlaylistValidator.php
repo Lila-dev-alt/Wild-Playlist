@@ -99,7 +99,7 @@ class PlaylistValidator
         $userPlaylist = $playlist->selectOneByUserId($userId);
         if (!empty($userPlaylist)) {
             $this->addErrors('playlistExists', 'Vous avez déjà créé une playlist avec ce compte.
-            Si vous voulez en ajouter une nouvelle, créez un aute compte.');
+            Si vous voulez en ajouter une nouvelle, créez un autre compte.');
         }
         return $this->errors;
     }
