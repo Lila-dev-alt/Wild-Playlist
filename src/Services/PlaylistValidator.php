@@ -98,8 +98,8 @@ class PlaylistValidator
         $playlist     = new PlaylistManager();
         $userPlaylist = $playlist->selectOneByUserId($userId);
         if (!empty($userPlaylist)) {
-            $this->addErrors('playlist', 'Vous avez déjà créé une playlist avec ce compte.
-            Si vous voulez en créer une nouvelle, créez un aute compte.');
+            $this->addErrors('playlistExists', 'Vous avez déjà créé une playlist avec ce compte.
+            Si vous voulez en ajouter une nouvelle, créez un autre compte.');
         }
         return $this->errors;
     }
@@ -147,7 +147,7 @@ class PlaylistValidator
         $playlistManager     = new PlaylistManager();
         $playlist = $playlistManager->selectOneById($id);
         if (empty($playlist)) {
-            $this->addErrors('playlist', 'Cette playlist n\'existe pas' );
+            $this->addErrors('playlist', 'Cette playlist n\'existe pas');
         }
         return $this->errors;
     }

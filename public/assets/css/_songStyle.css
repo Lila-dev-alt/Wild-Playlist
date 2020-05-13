@@ -1,5 +1,5 @@
 .hidden{
-    display: none;
+   display: none;
 }
 .hidden2{
     display: none !important;
@@ -7,6 +7,7 @@
 .display{
     display: block;
 }
+
 .iframeCardHover:hover{
     background-color: goldenrod ;
     cursor: pointer;
