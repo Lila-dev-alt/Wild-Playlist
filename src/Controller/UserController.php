@@ -130,4 +130,58 @@ class UserController extends AbstractController
         header('Location:/home/index/'); //redirection après déconnexion
         exit;
     }
+
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function show()
+    {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
+
+        $userManager = new UserManager();
+        $users = $userManager->selectAll();
+
+        return $this->twig->render('User/all.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * Handle id deletion
+     *
+     * @param int $id
+     */
+    public function delete()
+    {
+
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userManager = new UserManager();
+            $userManager->delete($_POST['deleteUser']);
+            header('Location:/user/show');
+            exit();
+        }
+    }
 }
