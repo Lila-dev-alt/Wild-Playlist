@@ -14,7 +14,7 @@
     <h2 class="text-center pt-5 mb-5">{{ songs[0].playlistName | capitalize}} ajoutée par {{ songs[0].name | capitalize}} </h2>
     <ul class="mb-5 text-center">
         {% for song in songs%}
-            <li class="pb-4 mr-4 song  border border-white rounded d-lg-flex flex-lg-row justify-content-between list-dec iframeCardHover" title="Cliquez pour faire apparaitre le clip">
+            <li class="pb-4 mr-4 song  border border-white rounded d-lg-flex flex-lg-row justify-content-between list-dec iframeCardHover" title="Cliquez pour faire apparaître la vidéo">
                 <div class="text-left m-5 text-sm-center">
                     <h4>{{ song.content | capitalize}} <small><i class="fas fa-angle-right"></i></small></h4>
                 </div>

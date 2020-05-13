@@ -84,8 +84,8 @@ class SongController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //VERIFY IF PL ALREADY EXISTS
             $validator = new PlaylistValidator();
-            $checkUserPlaylist = $validator->checkIfUserHasPlaylist($_SESSION['id']);
-            if (empty($checkUserPlaylist)) {
+            $errors['hasPlaylist'] = $validator->checkIfUserHasPlaylist($_SESSION['id']);
+            if (empty($errors['hasPlaylist'])) {
                 //Getting user_id and validate playlist name
                 $playlistName = $validator->cleanInput($_POST['name']);
                 $playlist = [
@@ -125,5 +125,4 @@ class SongController extends AbstractController
             'post'=> $_POST,
         ]);
     }
-
 }
