@@ -14,91 +14,13 @@
 </head>
 <body>
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-danger">
-        <a class="navbar-brand" href="/home/index"><img src="/assets/images/w-blanc.png"  alt="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link pink-hover text-right" href="/home/index">Wild Playlist </a>
-                </li>
-                {% if session.username is defined %}
-                <li class="nav-item">
-                    <a class="nav-link blue-hover text-right"  href="/playlist/list/name">Trouver une playlist</a>
-                </li>
-                {% endif %}
-            </ul>
-            {% if session.username is defined %}
-                {% if session.admin != '1' %}
-                    <div class="d-flex nav-item navbar-nav">
-                        <a class=" mr-3 nav-link green-hover text-sm-right" href="/song/add"><span> <i class="fas fa-guitar"></i></span> Ajouter ma playlist </a>
-                        <a class=" mr-3 nav-link green-hover text-sm-right" href="#"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant que {{ session.username | capitalize }}</a>
-                        <a class=" mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
-                    </div>
-                {% else %}
-                    <div class="d-flex nav-item navbar-nav">
-                        <div class="nav-item list-dec text-decoration-none dropdown">
-                            <a class="nav-link green-hover dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Administrateur
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class=" dropdown-item  nav-link" href="/question/show">Gestion des questions</a>
-                                <a class=" dropdown-item  nav-link " href="/playlist/delete/name">Gestion des playlists</a>
-                                <a class=" dropdown-item  nav-link" href="/comment/show">Gestion des commentaires</a>
-                                <a class=" dropdown-item  nav-link" href="/user/show">Gestion des utilisateurs</a>
-                            </div>
-                        </div>
-                        <a class="dropdown-item mr-3 nav-link green-hover text-sm-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Connecté(e) en tant qu'admin {{ session.username | capitalize }} </a>
-                        <a class=" dropdown-item mr-3 nav-link purple-hover text-sm-right" href="/user/logout"><span><i class="fas fa-sign-in-alt"></i></span> Déconnexion</a>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="d-flex nav-item navbar-nav">
-                    <a class=" mr-3 nav-link green-hover text-right" href="/user/add"><span> <i class="fas fa-user-plus"></i></span> Inscription</a>
-                    <a class=" mr-3 nav-link purple-hover text-right" href="/user/login"><span><i class="fas fa-sign-in-alt"></i></span> Connexion</a>
-                </div>
-            {% endif %}
-        </div>
-    </nav>
+   {% include'components/_navbar.html.twig' %}
 {% endblock %}
-<div class="container-c">
+
 {% block content %}{% endblock %}
-</div>
+
 {% block footer %}
-    <footer class=" container-fluid footer border-top border-success">
-        <div class=" d-flex justify-content-between align-items-center">
-            <div class="mt-4 ">
-                <p class="text-wrap ">Made Wildly with Love by :</p>
-                <div>
-                    <div>
-                        <a class="text-dark text-reset ml-lg-4 " href="https://www.linkedin.com/in/amelie-g-9a7730198/" target="_blank">Amélie</a>
-                        <a class="text-dark text-reset ml-lg-4" href="https://www.linkedin.com/in/elisa-bourg-7848a9171/" target="_blank">Elisa</a>
-                    </div>
-                    <div class="mt-3">
-                        <a class="text-dark text-reset ml-lg-4" href="https://www.linkedin.com/in/fredreal/" target="_blank">Fred</a>
-                        <a class="text-dark text-reset ml-lg-4" href="https://www.linkedin.com/in/ludovic-dureau-b7108a1aa/" target="_blank">Ludovic</a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="https://www.facebook.com/WildCodeSchool/" >
-                    <i class="fab fa-facebook-f fa-2x text-dark ml-1 ml-md-5"> </i>
-                </a>
-                <a href="https://twitter.com/WildSchool_Bdx" class="ml-sm-3">
-                    <i class="fab fa-twitter fa-2x text-dark  ml-1 ml-md-5"></i>
-                </a>
-                <a href="https://www.linkedin.com/school/wild-codes-chool/" class="ml-sm-3">
-                    <i class="fab fa-linkedin-in fa-2x text-dark ml-1 ml-md-5"></i>
-                </a>
-                <a href="https://www.instagram.com/wildcodeschoolofficial/?hl=fr" class="ml-sm-3">
-                    <i class="fab fa-instagram fa-2x text-dark ml-1 ml-md-5 mr-2"></i>
-                </a>
-            </div>
-        </div>
-        <p class="mt-2 text-center font-weight-lighter">© 2020 Tous droits réservés <img src="https://avatars3.githubusercontent.com/u/8874047?s=200&v=4" alt="logo Wild Code School"></p>
-    </footer>
+    {% include 'components/_footer.html.twig' %}
 {% endblock %}
 
 {% block js %}
