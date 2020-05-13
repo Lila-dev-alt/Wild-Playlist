@@ -75,6 +75,10 @@ class SongController extends AbstractController
 
     public function add()
     {
+        if (empty($_SESSION)) {
+            header('Location: /user/add/?connected=0');
+            exit;
+        }
         //select Questions
         $questionManager = new QuestionManager();
         $questions = $questionManager->selectAll();

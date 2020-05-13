@@ -24,6 +24,9 @@ class UserController extends AbstractController
         $errors = [];
         $user = [];
         $noError = "";
+        if (isset($_GET['connected'])) {
+            $errors['notConnected']='Merci de vous inscrire ou de vous connecter !';
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Prepare user array from POST data
             $user = [

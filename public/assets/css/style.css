@@ -5,9 +5,7 @@ a, .list-dec{
     text-decoration: none;
     list-style: none;
 }
-h1, h5{
-    font-family: 'Paytone One', sans-serif;
-}
+
 /*NAVBAR*/
 .navbar-brand img {
     height: 70px;
@@ -37,9 +35,7 @@ h1, h5{
     box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
 
-h1 img {
-    height:70px;
-}
+
 /* FOOTER */
 .footer{
     height: 20vh;
