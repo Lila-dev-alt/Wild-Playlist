@@ -11,16 +11,15 @@
             <label for="name">Titre de la Playlist : </label>
             <input type="text" name="name" class="small mb-3" min="2" max="255" required>
         </div>
-        {% if errors.playlist is defined %}
+        {% if errors.playlist is defined and errors.playlist is not empty %}
             <div class="alert alert-danger ">{{ errors.playlist }} </div>
         {% endif %}
-        {% if errors.hasPlaylist is defined %}
+        {% if errors.hasPlaylist.playlistExists is defined  %}
             <div class="alert alert-danger">{{ errors.hasPlaylist.playlistExists }} </div>
         {% endif %}
         {% if errors.playlistName.playlistName is defined %}
             <div class="alert alert-warning">{{ errors.playlistName.playlistName }} </div>
         {% endif %}
-
         <div class="d-flex flex-column">
             {% if errors.url.urlSong is defined %}
                 <div class="alert alert-warning">{{ errors.url.urlSong }} </div>
