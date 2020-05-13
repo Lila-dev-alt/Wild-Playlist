@@ -4,8 +4,8 @@
     <h4 class="text-center container text-danger mt-2 mb-3">Choisissez un titre</h4>
     <h4 class="text-center container text-danger mt-2 mb-3">puis copiez-collez les URL de vos chansons préférées
         sélectionnées sur
-        <a href="https://www.youtube.com" target="_blank" class="list-dec text-danger">https://www.youtube.com </a> </h4>
-    <h3 class="text-center"><a href="https://www.youtube.com" class="list-dec text-danger"><i class="fab fa-youtube fa-2x"></i></a></h3>
+        <a href="https://www.youtube.com" target="_blank" class="list-dec text-reset text-danger">https://www.youtube.com </a> </h4>
+    <h3 class="text-center"><a href="https://www.youtube.com" class="list-dec text-danger" target="_blank"><i class="fab fa-youtube fa-2x"></i></a></h3>
     <form action="" method="post" class="container shadow-lg  rounded text-center bg-white pt-3 mb-5 mt-5">
         <div class="d-flex flex-column align-items-center">
             <label for="name">Titre de la Playlist : </label>
@@ -14,9 +14,13 @@
         {% if errors.playlist is defined %}
             <div class="alert alert-danger ">{{ errors.playlist }} </div>
         {% endif %}
+        {% if errors.hasPlaylist is defined %}
+            <div class="alert alert-danger">{{ errors.hasPlaylist.playlistExists }} </div>
+        {% endif %}
         {% if errors.playlistName.playlistName is defined %}
             <div class="alert alert-warning">{{ errors.playlistName.playlistName }} </div>
         {% endif %}
+
         <div class="d-flex flex-column">
             {% if errors.url.urlSong is defined %}
                 <div class="alert alert-warning">{{ errors.url.urlSong }} </div>
