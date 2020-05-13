@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheet %}
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Modak&family=Paytone+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/_homeStyle.css">
 {% endblock %}
 
@@ -8,8 +9,10 @@
     {% if notConnected.notConnected is defined %}
         <div class="alert alert-danger mt-3 container text-center">{{ notConnected.notConnected }}</div>
     {% endif %}
+    <h1 class="text-danger text-center mt-3"><img src="/assets/images/w-blanc.png" alt="logo"> WILD PLAYLIST </h1>
+    <h5 class="text-secondary text-center ml-5 pb-5">Partage de playlists</h5>
     <div class="container">
-        <h2 class="text-center m-5">Les dernières playlists créées</h2>
+        <h2 class="text-center mt-5 mb-5 ml-5">Les dernières playlists</h2>
     </div>
     {% for playlist in playlists %}
         <div class="media border rounded shadow-lgs p-3 mb-5 bg-white p-3 container d-flex flex-column align-items-center
