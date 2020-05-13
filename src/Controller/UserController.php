@@ -33,7 +33,7 @@ class UserController extends AbstractController
                 $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
                 $userManager = new UserManager;
                 $userManager->insert($user);
-                header('Location:/user/login/?' . http_build_query(['no_error' =>$noError]) );
+                header('Location:/user/login/?' . http_build_query(['no_error' =>$noError]));
                 exit;
             }
         }
@@ -61,7 +61,6 @@ class UserController extends AbstractController
         }
 
         return $this->twig->render('User/add.html.twig', $paramTemplate);
-
     }
 
     public function check()
@@ -98,9 +97,7 @@ class UserController extends AbstractController
                 header('Location:/user/login/?' . http_build_query($paramTemplate));
                 exit;
             }
-
         }
-
     }
 
     public function logout ()
@@ -120,6 +117,17 @@ class UserController extends AbstractController
      */
     public function show()
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
+
         $userManager = new UserManager();
         $users = $userManager->selectAll();
 
@@ -133,12 +141,25 @@ class UserController extends AbstractController
      *
      * @param int $id
      */
-    public function delete(int $id)
+    public function delete()
     {
-        $userManager = new UserManager();
-        $userManager->delete($id);
-        header('Location:/user/show');
 
-        exit();
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userManager = new UserManager();
+            $userManager->delete($_POST['deleteUser']);
+            header('Location:/user/show');
+            exit();
+        }
     }
 }

@@ -31,7 +31,7 @@ class UserManager extends AbstractManager
         $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
         $statement->bindValue('password', $user['password'], \PDO::PARAM_STR);
 
-       $statement->execute();
+        $statement->execute();
     }
     public function selectOneByUsername(string $pseudo)
     {
@@ -53,5 +53,4 @@ class UserManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
-
 }

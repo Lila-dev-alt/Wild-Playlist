@@ -53,7 +53,7 @@ class PlaylistController extends AbstractController
                 exit();
             }
         }
-        return $this->twig->render('Playlist/all.html.twig',[
+        return $this->twig->render('Playlist/delete.html.twig', [
             'playlists'=> $playlists,
             'errors' => $errors,
             'message'  => $message,
