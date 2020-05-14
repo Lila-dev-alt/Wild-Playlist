@@ -18,6 +18,10 @@ class PlaylistController extends AbstractController
      */
     public function list(string $name)
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
         $playlistManager = new PlaylistManager();
         $playlists = $playlistManager->selectByName($name);
         return $this->twig->render("Playlist/list.html.twig", [
