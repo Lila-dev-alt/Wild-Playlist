@@ -71,6 +71,16 @@ class QuestionController extends AbstractController
      */
     public function edit(int $id): string
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
         $questionManager = new QuestionManager();
         $question = $questionManager->selectOneById($id);
 
@@ -85,6 +95,16 @@ class QuestionController extends AbstractController
 
     public function add()
     {
+        if (empty($_SESSION)) {
+            header('Location: /home/index/?connected=0');
+            exit();
+        }
+        if (!empty($_SESSION)) {
+            if (!($_SESSION['admin']=='1')) {
+                header('Location:/home/index');
+                exit();
+            }
+        }
         $error=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['content'])) {

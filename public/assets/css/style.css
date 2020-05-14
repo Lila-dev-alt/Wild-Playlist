@@ -5,6 +5,7 @@ a, .list-dec{
     text-decoration: none;
     list-style: none;
 }
+
 /*NAVBAR*/
 .navbar-brand img {
     height: 70px;
@@ -34,6 +35,7 @@ a, .list-dec{
     box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
 
+
 /* FOOTER */
 .footer{
     height: 20vh;
@@ -50,6 +52,7 @@ a, .list-dec{
     width: 100%;
     height: 100%;
 }
+
 
 .wave-container {
     height: 100%;
