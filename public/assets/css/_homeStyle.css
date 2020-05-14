@@ -13,7 +13,7 @@ ul{
     padding-inline-start: 0;
 }
 
-/*Hover on title Card Homepage*/
+/*Hover on title Card Homepage desktop*/
 @media screen and (min-width: 768px) {
     li .oneplaylist p{
         font-size: 1.2rem;
@@ -46,7 +46,7 @@ ul{
         width: 250px;
         box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.15);
     }
-    ul li:hover{
+    ul .border:hover{
         box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.15) !important;
     }
     li .oneplaylist h5 a:hover span {

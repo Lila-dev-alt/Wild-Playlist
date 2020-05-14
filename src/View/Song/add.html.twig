@@ -4,7 +4,8 @@
     <form action="" method="post" class="container shadow-lg  rounded text-center bg-white pt-3 mb-5 mt-5">
         <div class="d-flex flex-column align-items-center">
             <label for="name">Titre de ma Playlist : </label>
-            <input type="text" name="name" class="small mb-3" min="2" max="255" required>
+            <input type="text" name="name" class="small mb-3" min="2" max="255"
+                   value="{{  (post is defined) ?  post.name }}" required>
         </div>
         {% if errors.playlist is defined and errors.playlist is not empty %}
             <div class="alert alert-danger ">{{ errors.playlist }} </div>
