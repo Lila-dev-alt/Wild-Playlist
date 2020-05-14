@@ -25,7 +25,7 @@ class SongManager extends AbstractManager
     public function showByName(string $name)
     {
         $statement = $this->pdo->prepare("SELECT song.id, song.name AS songName, song.url, 
-            p.name AS playlistName,p.id AS playlistId, u.name, q.content 
+            p.name AS playlistName,p.id AS playlistId, u.name,u.id AS userId, q.content 
             FROM " . self::TABLE .
             " JOIN playlist  p ON p.id = song.playlist_id
             JOIN user u ON u.id = p.user_id
@@ -52,5 +52,16 @@ class SongManager extends AbstractManager
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE playlist_id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }

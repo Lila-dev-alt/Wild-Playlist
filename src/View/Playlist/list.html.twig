@@ -7,12 +7,20 @@
     <div class="container text-center">
         <div class="card border shadow-lg p-3 mb-5 bg-white rounded text-center mt-4" >
             <div class="card-body">
-                <h5 class="card-title text-danger">Les Playlists</h5>
+                <h2 class="card-title text-danger mt-3 mb-5">Les Playlists</h2>
                 <table class="table table-hover">
+                    <thead class="thead-light font-weight-bold">
+                        <tr>
+                            <th scope="col" class="text-left ">Nom </th>
+                            <th scope="col" class="text-left ">Créée par</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {% for playlist in playlists %}
                             <tr>
                                 <th scope="row" class="list-dec text-left"><a href="/song/showone/{{ playlist.user_name }}" class="text-dark">{{ playlist.name | capitalize}} </a></th>
+                                <th scope="row" class="list-dec text-left"><a href="/song/showone/{{ playlist.user_name }}" class="text-dark">{{playlist.user_name | capitalize}}</i></a></th>
                                 <th scope="row" class="list-dec"><a href="/song/showone/{{ playlist.user_name }}" class="text-dark"><i class="fas fa-headphones"></i></a></th>
                             </tr>
                         {% endfor %}

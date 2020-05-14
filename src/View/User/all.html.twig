@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/_questionsAdmin.css">
+{% endblock %}
+{% block content %}
+    <div class="allpage">
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Gestion des <b>utilisateurs</b></h2>
+                        </div>
+                    </div>
+                </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Créé le:</th>
+                            <th>Admin</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for user in users %}
+                            <tr>
+                                <td>
+                                    {{ user.name }}
+                                </td>
+                                <td>
+                                    {{ user.email }}
+                                </td>
+                                <td>
+                                    {{ user.created_at|date('d-m-Y H:i') }}
+                                </td>
+                                <td>
+                                    {{ user.is_admin }}
+                                </td>
+                                <td>
+                                    <form action="/user/delete/" method="post">
+                                    <input type="hidden" id="deleteUser" name="deleteUser" value="{{ user.id }}">
+                                    <button
+                                        type="submit"  class="delete button-border"><i class="material-icons" >&#xE872;</i>
+                                    </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

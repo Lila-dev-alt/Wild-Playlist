@@ -80,6 +80,20 @@ table.table td a {
     text-decoration: none;
     outline: none !important;
 }
+
+table.table tbody tr td form button {
+    font-weight: bold;
+    color: #566787;
+    display: inline-block;
+    text-decoration: none;
+    outline: none !important;
+    border-radius: 0;
+    box-sizing: unset;
+    background-color: transparent;
+    border:none;
+}
+
+
 table.table td a:hover {
     color: #2196F3;
 }
@@ -87,6 +101,9 @@ table.table td a.edit {
     color: #FFC107;
 }
 table.table td a.delete {
+    color: #F44336;
+}
+table tbody tr td form button.delete {
     color: #F44336;
 }
 table.table td i {
@@ -100,7 +117,6 @@ li {
 }
 
 /* css admin edit questions */
-
 
 .topbottom {
     text-align : center;

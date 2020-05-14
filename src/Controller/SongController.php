@@ -3,15 +3,20 @@
 
 namespace App\Controller;
 
+use App\Model\LikesManager;
 use App\Model\PlaylistManager;
 use App\Model\CommentManager;
 use App\Model\SongManager;
 use App\Model\QuestionManager;
+use App\Services\LikesValidator;
 use App\Services\PlaylistValidator;
-use http\Env\Request;
 
 class SongController extends AbstractController
 {
+
+    const BEGINNING_YOUTUBE_ID_AFTER_PARSED_URL = 2;
+    const YOUTUBE_ID_LENGTH = 11;
+
     /**
      * Display item listing
      *
@@ -25,6 +30,7 @@ class SongController extends AbstractController
     {
         if (empty($_SESSION)) {
             header('Location: /home/index/?connected=0');
+            exit;
         }
 
         $message=[];
@@ -34,11 +40,17 @@ class SongController extends AbstractController
         $songManager= new SongManager();
         $commentManager = new CommentManager();
         $songs= $songManager->showByName($userName);
-
         if (isset($_GET['added'])) {
             $message['added']='Playlist ajoutée avec succès';
         }
-        
+        //affiche les likes
+        $likesManager= new LikesManager();
+        $likes = $likesManager->countLikes($songs[0]['playlistId']);
+        //cherche si déja liké
+        $likesValidator= new LikesValidator($songs);
+        $likesValidator->checkIfUserAddedLike($songs[0]['playlistId']);
+        $message= $likesValidator->getErrors();
+
         $comments = $commentManager->selectComments($songs[0]['playlistId']);
         if ($_GET) {
             if (array_key_exists("tooLong", $_GET)) {
@@ -49,7 +61,8 @@ class SongController extends AbstractController
             'comments' => $comments,
             'message'=>$message,
             'username' => $userName,
-            'errorComments'=>$errorComments
+            'errorComments'=>$errorComments,
+            'likes'=> $likes,
         ]);
     }
 
@@ -62,17 +75,22 @@ class SongController extends AbstractController
 
     public function add()
     {
+        if (empty($_SESSION)) {
+            header('Location: /user/add/?connected=0');
+            exit;
+        }
         //select Questions
         $questionManager = new QuestionManager();
         $questions = $questionManager->selectAll();
         //Begin add
         $errors=[];
+        $songs=[];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //VERIFY IF PL ALREADY EXISTS
             $validator = new PlaylistValidator();
-            $checkUserPlaylist = $validator->checkIfUserHasPlaylist($_SESSION['id']);
-            if (empty($checkUserPlaylist)) {
-                //récup user_id+validator name
+            $errors['hasPlaylist'] = $validator->checkIfUserHasPlaylist($_SESSION['id']);
+            if (empty($errors['hasPlaylist'])) {
+                //Getting user_id and validate playlist name
                 $playlistName = $validator->cleanInput($_POST['name']);
                 $playlist = [
                     'name' => $playlistName,
@@ -81,36 +99,28 @@ class SongController extends AbstractController
                 $validator->validatePlaylistName($playlist['name']);
                 $errors['playlistName'] = $validator->getErrors();
                 //FormValidator (url)
-                $validation = new PlaylistValidator();
+                //$validation = new PlaylistValidator();
                 foreach ($_POST as $input => $value) {
                     if (!is_string($input)) {
                         $songs[$input]['question_id'] = $input;
                         $songs[$input]['url'] = $value;
-                        $validation->validateUrlSong($songs[$input]['url']);
-                        $errors['url'] = $validation->getErrors();
+                        $validator->validateUrlSong($songs[$input]['url']);
+                        $errors['url'] = $validator->getErrors();
                     }
                 }
-
                 //if no error
-                //insert PL (PL name, user_id)
-                // Insert ds song (name, url, pl_id, Q_id)
-                if (empty($errors['playlistName']) && empty($errors['url'])) {
-                    $songManager = new SongManager();
-                    $playlistManager = new PlaylistManager();
-                    if (!empty($playlist) && !empty($songs)) {
-                        $playlist['playlist_id'] = $playlistManager->insertOnePlaylist($playlist);
-                        $playlistId = $playlist['playlist_id'];
-                      
-                        foreach ($songs as $song) {
-                            $parsedUrl= parse_url($song['url'], PHP_URL_QUERY);
-                            $song['url']= substr($parsedUrl, 2, 11);
-                            $songManager->insertSong($song, $playlistId);
-                        }
-                        header('Location: /song/showone/' . $_SESSION['username'] . '/?added=ok');
+                if (!empty($songs)) {
+                    $validator->isPlaylistReadyToInsert($errors, $playlist, $songs);
+                    $errors['isPlaylistReady'] = $validator->getErrors();
+                    if (empty($errors['isPlaylistReady'])) {
+                        //insert PL (PL name, user_id & Insert ds song (name, url, pl_id, Q_id)
+                        $validator->insertPlaylistAndSongs($playlist, $songs);
+                        header('Location: /song/showone/' . $_SESSION['username'] . '/?added=1');
+                        exit;
                     }
+                } else {
+                    $errors = $validator->getErrors();
                 }
-            } else {
-                $errors= $validator->getErrors();
             }
         }
         return $this->twig->render('Song/add.html.twig', [

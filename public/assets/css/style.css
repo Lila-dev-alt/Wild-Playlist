@@ -5,6 +5,7 @@ a, .list-dec{
     text-decoration: none;
     list-style: none;
 }
+
 /*NAVBAR*/
 .navbar-brand img {
     height: 70px;
@@ -21,6 +22,10 @@ a, .list-dec{
     font-weight: bold;
     color: #038C5A;
 }
+.navbar .collapse > .nav-item > .dropdown .green-hover:hover{
+    font-weight: bold;
+    color: #038C5A;
+}
 .navbar .collapse > .nav-item > .purple-hover:hover {
     font-weight: bold;
     color: #7E338F;
@@ -29,6 +34,7 @@ a, .list-dec{
 .media:hover, .form-group:hover, .shadow-lgs input:hover {
     box-shadow: 0 10px 20px 6px rgba(0,0,0,0.2) !important;
 }
+
 
 /* FOOTER */
 .footer{
@@ -47,6 +53,7 @@ a, .list-dec{
     height: 100%;
 }
 
+
 .wave-container {
     height: 100%;
     width: 100%;
@@ -60,10 +67,10 @@ a, .list-dec{
 }
 
 /*Add Playlist*/
-.btn-outline-success{
+.moving-btn{
     transition: transform .2s;
 }
-.btn-outline-success:hover{
+.moving-btn:hover{
     transform: scale(1.2) rotate(-10deg) ;
 }
 .small{
