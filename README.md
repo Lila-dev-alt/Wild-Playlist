@@ -2,6 +2,8 @@
 
 ## Description
 
+Projet de création et de partage de Playlist
+
 This repository is a simple PHP MVC structure from scratch.
 
 It uses some cool vendors/libraries such as Twig and Grumphp.
